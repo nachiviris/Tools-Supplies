@@ -6,3 +6,5 @@ CREATE TABLE empleados (
     fecha_contratacion DATE,
     salario NUMBER(10, 2)
 );
+
+select * from empleados;
