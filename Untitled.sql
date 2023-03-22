@@ -8,3 +8,6 @@ CREATE TABLE empleados (
 );
 
 select * from empleados;
+
+ 
+select * from empleado; 
