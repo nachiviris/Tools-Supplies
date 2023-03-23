@@ -1,18 +1,17 @@
 --- Consultar el nombre de un cliente a partir de su ID ---
-CREATE OR REPLACE FUNCTION obtener_nombre_cliente(cliente_id IN NUMBER)
-RETURN VARCHAR2
+
+CREATE OR REPLACE FUNCTION obtener_nombre_cliente(cliente_id IN NUMBER) RETURN VARCHAR2
 IS
   nombre_cliente VARCHAR2(50);
 BEGIN
-  SELECT nombre_cliente
-  INTO nombre_cliente
+  SELECT nombre_cliente INTO nombre_cliente
   FROM Clientes
-  WHERE cliente_id = cliente_id;
+  WHERE cliente_id = obtener_nombre_cliente.cliente_id;
   
   RETURN nombre_cliente;
 END;
 
-SELECT obtener_nombre_cliente (1) from Clientes;
+SELECT obtener_nombre_cliente(1) FROM dual;
 
 --- Detalle de Orden a partir de la tabla Productos ---
 /*CREATE FUNCTION obtener_detalle_orden(orden_id INTEGER) 

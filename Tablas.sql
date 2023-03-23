@@ -34,3 +34,5 @@ CREATE TABLE Ordenes (
     CONSTRAINT FK_Ordenes_Clientes FOREIGN KEY (cliente_id) REFERENCES Clientes(cliente_id),
     CONSTRAINT FK_Ordenes_Empleados FOREIGN KEY (empleado_id) REFERENCES Empleados(empleado_id)
 )TABLESPACE TBS_TS_DATA;
+
+select * from Clientes;
