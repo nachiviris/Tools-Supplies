@@ -48,20 +48,60 @@ END;
 
 --- Registrar empleado ---
 
-CREATE OR REPLACE PROCEDURE REGISTRAR_EMPLEADO(
-  empleado_id IN Empleados.empleado_id%TYPE,
-  nombre_empleado IN Empleados.nombre_empleado%TYPE,
-  direccion_empleado IN Empleados.direccion_empleado%TYPE,
-  telefono_empleado IN Empleados.telefono_empleado%TYPE,
-  correo_empleado IN Empleados.correo_empleado%TYPE,
-  puesto_empleado IN Empleados.puesto_empleado%TYPE
+CREATE OR REPLACE PROCEDURE registrar_empleado (
+    p_empleado_id Empleados.empleado_id%TYPE,
+    p_nombre_empleado Empleados.nombre_empleado%TYPE,
+    p_direccion_empleado Empleados.direccion_empleado%TYPE,
+    p_telefono_empleado Empleados.telefono_empleado%TYPE,
+    p_correo_empleado Empleados.correo_empleado%TYPE,
+    p_puesto_empleado Empleados.puesto_empleado%TYPE
 ) AS
 BEGIN
-  INSERT INTO Empleados(empleado_id, nombre_empleado, direccion_empleado, telefono_empleado, correo_empleado, puesto_empleado)
-  VALUES(empleado_id, nombre_empleado, direccion_empleado, telefono_empleado, correo_empleado, puesto_empleado);
-  COMMIT;
+    INSERT INTO Empleados (
+        empleado_id,
+        nombre_empleado,
+        direccion_empleado,
+        telefono_empleado,
+        correo_empleado,
+        puesto_empleado
+    ) VALUES (
+        p_empleado_id,
+        p_nombre_empleado,
+        p_direccion_empleado,
+        p_telefono_empleado,
+        p_correo_empleado,
+        p_puesto_empleado
+    );
+    
+    COMMIT;
+    DBMS_OUTPUT.PUT_LINE('El empleado ha sido registrado exitosamente.');
+EXCEPTION
+    WHEN OTHERS THEN
+        ROLLBACK;
+        DBMS_OUTPUT.PUT_LINE('Ha ocurrido un error al registrar el empleado.');
+        DBMS_OUTPUT.PUT_LINE(SQLERRM);
 END;
 
+BEGIN
+    REGISTRAR_EMPLEADO(1, 'Manuel Quesada', 'Calle 502', '808854157', 'manuelquesada@gmail,com', 'Bodega');
+END;
+
+
+CREATE OR REPLACE PROCEDURE registrar_empleado(
+    p_empleado_id IN Empleados.empleado_id%TYPE,
+    p_nombre_empleado IN Empleados.nombre_empleado%TYPE,
+    p_direccion_empleado IN Empleados.direccion_empleado%TYPE,
+    p_telefono_empleado IN Empleados.telefono_empleado%TYPE,
+    p_correo_empleado IN Empleados.correo_empleado%TYPE,
+    p_puesto_empleado IN Empleados.puesto_empleado%TYPE
+) AS
+BEGIN
+    INSERT INTO Empleados(empleado_id, nombre_empleado, direccion_empleado, telefono_empleado, correo_empleado, puesto_empleado)
+    VALUES(p_empleado_id, p_nombre_empleado, p_direccion_empleado, p_telefono_empleado, p_correo_empleado, p_puesto_empleado);
+    
+    COMMIT;
+    DBMS_OUTPUT.PUT_LINE('Empleado registrado con éxito');
+END;
 --- Registrar orden ---
 
 CREATE OR REPLACE PROCEDURE registrar_orden
