@@ -14,7 +14,7 @@ END;
 SELECT obtener_nombre_cliente(1) FROM dual;
 
 --- Detalle de Orden a partir de la tabla Productos ---
-/*CREATE FUNCTION obtener_detalle_orden(orden_id INTEGER) 
+CREATE FUNCTION obtener_detalle_orden(orden_id INTEGER) 
 RETURN sys_refcursor AS 
 detalle_cursor sys_refcursor; 
 BEGIN 
@@ -24,7 +24,7 @@ BEGIN
     INNER JOIN Productos p ON d.producto_id = p.producto_id 
     WHERE d.orden_id = orden_id; 
     RETURN detalle_cursor; 
-END; */
+END;
 
 --- Contar la cantidad de productos disponibles de un producto en especifico ---
 /*CREATE OR REPLACE FUNCTION contar_productos(nombre_producto VARCHAR2) RETURN NUMBER IS

@@ -15,4 +15,4 @@ SELECT o.orden_id, o.cliente_id, o.empleado_id, e.nombre_empleado, o.nombre_orde
 FROM Ordenes o
 JOIN Empleados e ON o.empleado_id = e.empleado_id;
 
-
+select * from ordenes_por_empleado;
