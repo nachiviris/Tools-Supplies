@@ -60,7 +60,7 @@ CREATE TABLE Productos (
     producto_id INT NOT NULL CONSTRAINT PK_PRO_ID PRIMARY KEY USING INDEX TABLESPACE TBS_TS_IDX,
     proveedor_id INT NOT NULL,
     categoria_id INT NOT NULL,
-    nombre_prodcuto VARCHAR2(50) NOT NULL,
+    nombre_producto VARCHAR2(50) NOT NULL,
     fecha_orden DATE NOT NULL,
     descripcion_producto VARCHAR2(100) NOT NULL,
     CONSTRAINT FK_Productos_Proveedores FOREIGN KEY (proveedor_id) REFERENCES Proveedores(proveedor_id),
