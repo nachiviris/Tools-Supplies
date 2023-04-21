@@ -72,7 +72,7 @@ public class FrmMenu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Prudcto");
+        jMenu2.setText("Pruducto");
         jMenu2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jMenuBar1.add(jMenu2);
 
