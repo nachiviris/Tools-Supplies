@@ -11,47 +11,54 @@ package modelo;
 public class Usuario {
     
     private int usuario_id;
-    private String nombre;
-    private String apellido;
+    private String nombre_usuario;
+    private String apellido_usuario;
     private String usuario;
     private String password;
-    private String telefono;
     private int estado;
 
-    //Contructor vacío
+    public Usuario(int usuario_id, String nombre_usuario, String apellido_usuario, String usuario, String password, int estado) {
+        this.usuario_id = usuario_id;
+        this.nombre_usuario = nombre_usuario;
+        this.apellido_usuario = apellido_usuario;
+        this.usuario = usuario;
+        this.password = password;
+        this.estado = estado;
+    }
+
+
     public Usuario() {
         this.usuario_id = 0;
-        this.nombre = "";
-        this.apellido = "";
+        this.nombre_usuario = "";
+        this.apellido_usuario = "";
         this.usuario = "";
         this.password = "";
-        this.telefono = "";
         this.estado = 0;
     }
 
-    //set and get
-    public int getIdUsuario() {
+   
+    public int getUsuario_id() {
         return usuario_id;
     }
 
-    public void setIdUsuario(int usuario_id) {
+    public void setUsuario_id(int usuario_id) {
         this.usuario_id = usuario_id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombre_usuario() {
+        return nombre_usuario;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombre_usuario(String nombre_usuario) {
+        this.nombre_usuario = nombre_usuario;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getApellido_usuario() {
+        return apellido_usuario;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setApellido_usuario(String apellido_usuario) {
+        this.apellido_usuario = apellido_usuario;
     }
 
     public String getUsuario() {
@@ -70,14 +77,6 @@ public class Usuario {
         this.password = password;
     }
 
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
     public int getEstado() {
         return estado;
     }
@@ -86,5 +85,7 @@ public class Usuario {
         this.estado = estado;
     }
 
+  
+   
     
 }
