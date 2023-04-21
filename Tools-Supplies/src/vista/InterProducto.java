@@ -283,7 +283,7 @@ public class InterProducto extends javax.swing.JPanel {
         Connection conn = (Connection) DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "username", "password");
 
         // Preparar la consulta INSERT
-        PreparedStatement stmt = conn.prepareStatement("INSERT INTO productos (nombre_producto, descripcion_producto, categoria_id, proveedor_id) VALUES (?, ?, ?, ?)");
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO Productos (nombre_producto, descripcion_producto, categoria_id, proveedor_id) VALUES (?, ?, ?, ?)");
 
         // Configurar los parámetros de la consulta INSERT
         stmt.setString(1, nombre);
