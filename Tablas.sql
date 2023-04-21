@@ -73,7 +73,7 @@ CREATE TABLE Productos (
     fecha_orden DATE NOT NULL,
     descripcion_producto VARCHAR2(100) NOT NULL,
     CONSTRAINT FK_Productos_Proveedores FOREIGN KEY (proveedor_id) REFERENCES Proveedores(proveedor_id),
-    CONSTRAINT FK_Productos_Categorias FOREIGN KEY (categoria_id) REFERENCES Categorias(producto_id)
+    CONSTRAINT FK_Productos_Categorias FOREIGN KEY (categoria_id) REFERENCES Categorias(categoria_id)
 )TABLESPACE TBS_TS_DATA;
 
 CREATE TABLE Proveedores (
@@ -86,7 +86,7 @@ CREATE TABLE Proveedores (
 
 
 CREATE TABLE Categorias (
-    categoria_id INT NOT NULL CONSTRAINT PK_CAT_ID PRIMARY KEY USING INDEX TABLESPACE TBS_TS_IDX2,
+    categoria_id INT NOT NULL CONSTRAINT PK_CAT_ID PRIMARY KEY USING INDEX TABLESPACE TBS_TS_IDX,
     nombre_categoria VARCHAR2(50) NOT NULL,
     descripcion_categoria VARCHAR2(50) NOT NULL
 )TABLESPACE TBS_TS_DATA;

@@ -14,7 +14,7 @@ public class Conexion {
 
     private static Conexion conexion;
     
-    private static final String DBURL="jdbc:oracle:thin:@//localhost:1521/orcl";
+    private static final String DBURL="jdbc:oracle:thin:@localhost:1521:orcl";
     
     private static Connection conn=null;
     
@@ -40,5 +40,9 @@ public class Conexion {
             conexion=new Conexion();
         }
         return conn;
+    }
+
+    public Connection getConnection() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
