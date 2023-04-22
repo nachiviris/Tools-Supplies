@@ -22,6 +22,15 @@ public class Producto {
         this.nombre_producto = nombre_producto;
         this.descripcion_producto = descripcion_producto;
     }
+ public Producto () {
+     this.producto_id = 0;
+        this.nombre_producto = "";
+        this.descripcion_producto = "";
+        this.categoria_id = 0;
+        this.proveedor_id = 0;
+        
+ }
+    
 
     public int getProducto_id() {
         return producto_id;

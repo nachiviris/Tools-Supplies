@@ -16,16 +16,15 @@ import java.sql.Connection;
 public class Ctrl_Producto {
 
 
-    public boolean guardarProducto(int producto_id, int proveedor_id, int categoria_id, String nombre_producto, String descripcion_producto, String fecha_orden) {
+    public boolean guardarProducto(int producto_id, String nombre_producto, String descripcion_producto, int categoria_id, int proveedor_id) {
         try {
             Connection con = Conexion.getConexion();
-            PreparedStatement ps = con.prepareStatement("INSERT INTO Productos (producto_id, proveedor_id, categoria_id, nombre_producto, descripcion_producto, fecha_orden) VALUES (?, ?, ?, ?, ?, ?)");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Productos (producto_id, nombre_producto, descripcion_producto, categoria_id, proveedor_id) VALUES (?, ?, ?, ?, ?)");
             ps.setInt(1, producto_id);
-            ps.setInt(2, proveedor_id);
-            ps.setInt(3, categoria_id);
-            ps.setString(4, nombre_producto);
-            ps.setString(5, descripcion_producto);
-            ps.setString(6, fecha_orden);
+            ps.setString(2, nombre_producto);
+            ps.setString(3, descripcion_producto);
+            ps.setInt(4, categoria_id);
+            ps.setInt(5, proveedor_id);
             int result = ps.executeUpdate();
             if (result > 0) {
                 return true;
@@ -100,5 +99,9 @@ public class Ctrl_Producto {
             System.out.println("Error al actualizar el stock del producto: " + e.getMessage());
         }
         return false;
+    }
+
+    public boolean existeProducto(String trim) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
