@@ -8,12 +8,14 @@ package vista;
 
 import com.sun.jdi.connect.spi.Connection;
 import conexion.Conexion;
+import controlador.Ctrl_Producto;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import java.sql.PreparedStatement;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import modelo.Producto;
 
 
 /**
@@ -50,10 +52,10 @@ public class InterProducto extends javax.swing.JPanel {
         jTextArea4 = new javax.swing.JTextArea();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTextArea5 = new javax.swing.JTextArea();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        txt_nombreProducto = new javax.swing.JTextField();
+        txt_descripcion = new javax.swing.JTextField();
+        txt_idCategoria = new javax.swing.JTextField();
+        txt_idProveedor = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         jInternalFrame1.setVisible(true);
@@ -148,28 +150,28 @@ public class InterProducto extends javax.swing.JPanel {
         jTextArea5.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jScrollPane5.setViewportView(jTextArea5);
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txt_nombreProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txt_nombreProductoActionPerformed(evt);
             }
         });
 
-        jTextField2.setToolTipText("");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        txt_descripcion.setToolTipText("");
+        txt_descripcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                txt_descripcionActionPerformed(evt);
             }
         });
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        txt_idCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                txt_idCategoriaActionPerformed(evt);
             }
         });
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        txt_idProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                txt_idProveedorActionPerformed(evt);
             }
         });
 
@@ -198,19 +200,19 @@ public class InterProducto extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txt_descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txt_nombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txt_idCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txt_idProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(27, 27, 27))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -224,19 +226,19 @@ public class InterProducto extends javax.swing.JPanel {
                 .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_nombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField3)
+                    .addComponent(txt_idCategoria)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_idProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(66, Short.MAX_VALUE))
@@ -256,55 +258,49 @@ public class InterProducto extends javax.swing.JPanel {
         jPanel1.getAccessibleContext().setAccessibleName("");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txt_nombreProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombreProductoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txt_nombreProductoActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txt_descripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_descripcionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txt_descripcionActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void txt_idCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idCategoriaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_txt_idCategoriaActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void txt_idProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idProveedorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_txt_idProveedorActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-   String nombre = jTextField1.getText();
-    String descripcion = jTextField2.getText();
-    int categoriaId = Integer.parseInt(jTextField3.getText());
-    int proveedorId = Integer.parseInt(jTextField4.getText());
-
-    try {
-        // Conectar a la base de datos
-        Connection conn = (Connection) DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "username", "password");
-
-        // Preparar la consulta INSERT
-        PreparedStatement stmt = conn.prepareStatement("INSERT INTO Productos (nombre_producto, descripcion_producto, categoria_id, proveedor_id) VALUES (?, ?, ?, ?)");
-
-        // Configurar los parámetros de la consulta INSERT
-        stmt.setString(1, nombre);
-        stmt.setString(2, descripcion);
-        stmt.setInt(3, categoriaId);
-        stmt.setInt(4, proveedorId);
-
-        // Ejecutar la consulta INSERT
-        int rowsInserted = stmt.executeUpdate();
-        if (rowsInserted > 0) {
-            JOptionPane.showMessageDialog(null, "Producto guardado correctamente");
+     
+ if (txt_nombreProducto.getText().isEmpty() || txt_descripcion.getText().isEmpty() || txt_idCategoria.getText().isEmpty()
+                || txt_idProveedor.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Completa todos los campos");
+        } else {
+            //validamos si el usuaro ya esta registrado
+            Producto producto = new Producto();
+            Ctrl_Producto controlProducto= new Ctrl_Producto();
+            if (!controlProducto.existeProducto(txt_nombreProducto.getText().trim())) {
+                //enviamos datos del usuario
+                producto.setNombre_producto(txt_nombreProducto.getText().trim());
+                producto.setDescripcion_producto(txt_descripcion.getText().trim());
+                producto.setCategoria_id(txt_idCategoria.getText().indexOf(WIDTH));
+                producto.setProveedor_id(txt_idProveedor.getText().indexOf(WIDTH));
+      
+                
+                if (controlProducto.guardarProducto(PROPERTIES, TOOL_TIP_TEXT_KEY, TOOL_TIP_TEXT_KEY, ABORT, PROPERTIES)){
+                    JOptionPane.showMessageDialog(null, "¡Producto Registrado!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "¡Error al registrar Producto!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "El Producto ya esta registrado, ingrese otro.");
+            }
         }
-
-        // Cerrar la conexión y el objeto PreparedStatement
-        stmt.close();
-        conn.close();
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al guardar el producto: " + ex.getMessage());
-    }   catch (IOException ex) {
-            Logger.getLogger(InterProducto.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.Limpiar();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -323,9 +319,15 @@ public class InterProducto extends javax.swing.JPanel {
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextArea jTextArea4;
     private javax.swing.JTextArea jTextArea5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField txt_descripcion;
+    private javax.swing.JTextField txt_idCategoria;
+    private javax.swing.JTextField txt_idProveedor;
+    private javax.swing.JTextField txt_nombreProducto;
     // End of variables declaration//GEN-END:variables
+private void Limpiar() {
+        txt_nombreProducto.setText("");
+        txt_descripcion.setText("");
+        txt_idCategoria.setText("");
+        txt_idProveedor.setText("");
+    }
 }
