@@ -14,7 +14,7 @@ public class Conexion {
 
     private static Conexion conexion;
     
-    private static final String DBURL="jdbc:oracle:thin:@//localhost:1521/orcl";
+    private static final String DBURL="jdbc:oracle:thin:@localhost:1521:orcl";
     
     private static Connection conn=null;
     

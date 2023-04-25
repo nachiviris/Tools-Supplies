@@ -50,16 +50,15 @@ public class Ctrl_Producto {
         return false;
     }
 
-    public boolean actualizarProducto(int producto_id, int proveedor_id, int categoria_id, String nombre_producto, String descripcion_producto, String fecha_orden) {
+    public boolean actualizarProducto(int producto_id, String nombre_producto, String descripcion_producto, int categoria_id, int proveedor_id) {
         try {
             Connection con = Conexion.getConexion();
-            PreparedStatement ps = con.prepareStatement("UPDATE Productos SET proveedor_id = ?, categoria_id = ?, nombre_producto = ?, descripcion_producto = ?, fecha_orden = ? WHERE producto_id = ?");
-            ps.setInt(1, proveedor_id);
-            ps.setInt(2, categoria_id);
-            ps.setString(3, nombre_producto);
-            ps.setString(4, descripcion_producto);
-            ps.setString(5, fecha_orden);
-            ps.setInt(6, producto_id);
+            PreparedStatement ps = con.prepareStatement("UPDATE Productos SET nombre_producto = ?, descripcion_producto = ?, categoria_id = ?, proveedor_id = ? WHERE producto_id = ?");
+            ps.setInt(1, producto_id);
+            ps.setString(2, nombre_producto);
+            ps.setString(3, descripcion_producto);
+            ps.setInt(4, categoria_id);
+            ps.setInt(5, proveedor_id);
             int result = ps.executeUpdate();
             if (result > 0) {
                 return true;
