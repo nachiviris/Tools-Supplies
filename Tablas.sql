@@ -76,3 +76,23 @@ descripcion varchar(200) not null,
 estado int not null
 )TABLESPACE TBS_TS_DATA;
 
+
+
+CREATE SEQUENCE seq_idUsuario START WITH 1 INCREMENT BY 1;
+
+CREATE SEQUENCE seq_idCliente START WITH 1 INCREMENT BY 1;
+
+CREATE SEQUENCE seq_idDetalleVenta START WITH 1 INCREMENT BY 1;
+
+CREATE SEQUENCE seq_idCabeceraVenta START WITH 1 INCREMENT BY 1;
+
+CREATE SEQUENCE seq_idCategoria START WITH 1 INCREMENT BY 1;
+
+CREATE SEQUENCE seq_idProducto START WITH 1 INCREMENT BY 1;
+
+
+CREATE VIEW vista_ventas_clientes AS
+SELECT cv.idCabeceraVenta, cv.idCliente, c.nombre || ' ' || c.apellido as cliente,
+cv.valorPagar, cv.fechaVenta, cv.estado
+FROM tb_cabecera_venta cv, tb_cliente c
+WHERE cv.idCliente = c.idCliente;
