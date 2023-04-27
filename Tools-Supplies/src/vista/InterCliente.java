@@ -1,23 +1,22 @@
 package vista;
 
-import controlador.Ctrl_Usuario;
+import controlador.Ctrl_Cliente;
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
-import modelo.Usuario;
+import modelo.Cliente;
 
 /**
  *
  * @author ediso
  */
-public class InterUsuario extends javax.swing.JInternalFrame {
-    
-    public InterUsuario() {
+public class InterCliente extends javax.swing.JInternalFrame {
+
+    public InterCliente() {
         initComponents();
         this.setSize(new Dimension(400, 300));
-        this.setTitle("Nuevo Usuario");
-        
-        txt_password.setVisible(true);
-        txt_password_visible.setVisible(false);
+        this.setTitle("Nuevo Cliente");
+
     }
 
     /**
@@ -37,12 +36,10 @@ public class InterUsuario extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         txt_nombre = new javax.swing.JTextField();
         txt_apellido = new javax.swing.JTextField();
-        txt_usuario = new javax.swing.JTextField();
-        jButton_Guardar = new javax.swing.JButton();
+        txt_cedula = new javax.swing.JTextField();
         txt_telefono = new javax.swing.JTextField();
-        txt_password = new javax.swing.JPasswordField();
-        jCheckBox_ver_clave = new javax.swing.JCheckBox();
-        txt_password_visible = new javax.swing.JTextField();
+        jButton_Guardar = new javax.swing.JButton();
+        txt_direccion = new javax.swing.JTextField();
         jLabel_wallpaper = new javax.swing.JLabel();
 
         setClosable(true);
@@ -51,7 +48,7 @@ public class InterUsuario extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Nuevo Usuario");
+        jLabel1.setText("Nuevo Cliente");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -69,34 +66,32 @@ public class InterUsuario extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("Usuario:");
+        jLabel4.setText("Cédula:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 90, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Password:");
+        jLabel5.setText("Teléfono:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 90, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("Telefono:");
+        jLabel6.setText("Dirección:");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 90, -1));
 
         txt_nombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txt_nombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_nombreActionPerformed(evt);
-            }
-        });
         getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 170, -1));
 
         txt_apellido.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         getContentPane().add(txt_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 170, -1));
 
-        txt_usuario.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        getContentPane().add(txt_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 170, -1));
+        txt_cedula.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        getContentPane().add(txt_cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 170, -1));
+
+        txt_telefono.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        getContentPane().add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 170, -1));
 
         jButton_Guardar.setBackground(new java.awt.Color(0, 204, 204));
         jButton_Guardar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -108,21 +103,8 @@ public class InterUsuario extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jButton_Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 90, 30));
 
-        txt_telefono.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        getContentPane().add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 170, -1));
-
-        txt_password.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        getContentPane().add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 170, -1));
-
-        jCheckBox_ver_clave.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jCheckBox_ver_claveMouseClicked(evt);
-            }
-        });
-        getContentPane().add(jCheckBox_ver_clave, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, -1, -1));
-
-        txt_password_visible.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        getContentPane().add(txt_password_visible, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 170, -1));
+        txt_direccion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        getContentPane().add(txt_direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 170, -1));
 
         jLabel_wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo3.jpg"))); // NOI18N
         getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 280));
@@ -131,61 +113,57 @@ public class InterUsuario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GuardarActionPerformed
-        if (txt_nombre.getText().isEmpty() || txt_apellido.getText().isEmpty() || txt_usuario.getText().isEmpty()
-                || txt_password.getText().isEmpty() || txt_telefono.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Completa todos los campos");
-        } else {
-            //validamos si el usuaro ya esta registrado
-            Usuario usuario = new Usuario();
-            Ctrl_Usuario controlUsuario = new Ctrl_Usuario();
-            if (!controlUsuario.existeUsuario(txt_usuario.getText().trim())) {
-                //enviamos datos del usuario
-                usuario.setNombre(txt_nombre.getText().trim());
-                usuario.setApellido(txt_apellido.getText().trim());
-                usuario.setUsuario(txt_usuario.getText().trim());
-                usuario.setPassword(txt_password.getText().trim());
-                usuario.setTelefono(txt_telefono.getText().trim());
-                usuario.setEstado(1);
-                
-                if (controlUsuario.guardar(usuario)) {
-                    JOptionPane.showMessageDialog(null, "¡Usuario Registrado!");
+
+        Cliente cliente = new Cliente();
+        Ctrl_Cliente controlCliente = new Ctrl_Cliente();
+
+        if (!txt_nombre.getText().isEmpty() && !txt_apellido.getText().isEmpty() && !txt_cedula.getText().isEmpty()) {
+            //JOptionPane.showMessageDialog(null, "Correcto");
+
+            if (!controlCliente.existeCliente(txt_cedula.getText().trim())) {
+
+                cliente.setNombre(txt_nombre.getText().trim());
+                cliente.setApellido(txt_apellido.getText().trim());
+                cliente.setCedula(txt_cedula.getText().trim());
+                cliente.setTelefono(txt_telefono.getText().trim());
+                cliente.setDireccion(txt_direccion.getText().trim());
+                cliente.setEstado(1);
+
+                if (controlCliente.guardar(cliente)) {
+                    JOptionPane.showMessageDialog(null, "Registro Guardado");
+                    txt_nombre.setBackground(Color.green);
+                    txt_apellido.setBackground(Color.green);
+                    txt_cedula.setBackground(Color.green);
+                    txt_telefono.setBackground(Color.green);
+                    txt_direccion.setBackground(Color.green);
                 } else {
-                    JOptionPane.showMessageDialog(null, "¡Error al registrar Usuario!");
+                    JOptionPane.showMessageDialog(null, "Error al Guardar");
                 }
+
             } else {
-                JOptionPane.showMessageDialog(null, "El Usuario ya esta registrado, ingrese otro.");
+                JOptionPane.showMessageDialog(null, "El cliente ya esta registrado en la Base de Datos.");
+                txt_nombre.setBackground(Color.white);
+                txt_apellido.setBackground(Color.white);
+                txt_cedula.setBackground(Color.white);
+                txt_telefono.setBackground(Color.white);
+                txt_direccion.setBackground(Color.white);
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Completa todos los campos");
+            txt_nombre.setBackground(Color.red);
+            txt_apellido.setBackground(Color.red);
+            txt_cedula.setBackground(Color.red);
+            txt_telefono.setBackground(Color.red);
+            txt_direccion.setBackground(Color.red);
         }
+        //metodo limpiar
         this.Limpiar();
 
     }//GEN-LAST:event_jButton_GuardarActionPerformed
 
-    private void jCheckBox_ver_claveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox_ver_claveMouseClicked
-        if (jCheckBox_ver_clave.isSelected() == true) {
-            String pass = "";
-            char[] passIngresado = txt_password.getPassword();
-            for (int i = 0; i < passIngresado.length; i++) {
-                pass += passIngresado[i];
-            }
-            txt_password_visible.setText(pass);
-            txt_password.setVisible(false);
-            txt_password_visible.setVisible(true);
-        } else {
-            String passwordIngresado = txt_password_visible.getText().trim();
-            txt_password.setText(passwordIngresado);
-            txt_password.setVisible(true);
-            txt_password_visible.setVisible(false);
-        }
-    }//GEN-LAST:event_jCheckBox_ver_claveMouseClicked
-
-    private void txt_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_nombreActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Guardar;
-    private javax.swing.JCheckBox jCheckBox_ver_clave;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -194,11 +172,10 @@ public class InterUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel_wallpaper;
     private javax.swing.JTextField txt_apellido;
+    private javax.swing.JTextField txt_cedula;
+    private javax.swing.JTextField txt_direccion;
     private javax.swing.JTextField txt_nombre;
-    private javax.swing.JPasswordField txt_password;
-    private javax.swing.JTextField txt_password_visible;
     private javax.swing.JTextField txt_telefono;
-    private javax.swing.JTextField txt_usuario;
     // End of variables declaration//GEN-END:variables
      /**
      *
@@ -207,9 +184,9 @@ public class InterUsuario extends javax.swing.JInternalFrame {
     private void Limpiar() {
         txt_nombre.setText("");
         txt_apellido.setText("");
-        txt_password.setText("");
-        txt_usuario.setText("");
+        txt_cedula.setText("");
         txt_telefono.setText("");
+        txt_direccion.setText("");
     }
-    
+
 }

@@ -1,107 +1,148 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controlador;
+
+import conexion.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import modelo.Producto;
 
 /**
  *
- * @author crist
+ * @author Edison Zambrano - © Programador Fantasma
  */
-import conexion.Conexion;
-import java.sql.*;
-import java.sql.Connection;
-
-
 public class Ctrl_Producto {
-
-
-    public boolean guardarProducto(int producto_id, String nombre_producto, String descripcion_producto, int categoria_id, int proveedor_id) {
+     /**
+     * **************************************************
+     * metodo para guardar un nuevo producto
+     * **************************************************
+     */
+    public boolean guardar(Producto objeto) {
+        boolean respuesta = false;
+        Connection cn = Conexion.conectar();
         try {
-            Connection con = Conexion.getConexion();
-            PreparedStatement ps = con.prepareStatement("INSERT INTO Productos (producto_id, nombre_producto, descripcion_producto, categoria_id, proveedor_id) VALUES (?, ?, ?, ?, ?)");
-            ps.setInt(1, producto_id);
-            ps.setString(2, nombre_producto);
-            ps.setString(3, descripcion_producto);
-            ps.setInt(4, categoria_id);
-            ps.setInt(5, proveedor_id);
-            int result = ps.executeUpdate();
-            if (result > 0) {
-                return true;
+
+            PreparedStatement consulta = cn.prepareStatement("insert into tb_producto values(?,?,?,?,?,?,?,?)");
+            consulta.setInt(1, 0);//id
+            consulta.setString(2, objeto.getNombre());
+            consulta.setInt(3, objeto.getCantidad());
+            consulta.setDouble(4, objeto.getPrecio());
+            consulta.setString(5, objeto.getDescripcion());
+            consulta.setInt(6, objeto.getPorcentajeIva());
+            consulta.setInt(7, objeto.getIdCategoria());
+            consulta.setInt(8, objeto.getEstado());
+
+            if (consulta.executeUpdate() > 0) {
+                respuesta = true;
             }
+
+            cn.close();
+
         } catch (SQLException e) {
-            System.out.println("Error al guardar el producto: " + e.getMessage());
+            System.out.println("Error al guardar producto: " + e);
         }
-        return false;
+
+        return respuesta;
     }
 
-    public boolean productoExiste(int producto_id) {
-        try {
-            Connection con = Conexion.getConexion();
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM Productos WHERE producto_id = ?");
-            ps.setInt(1, producto_id);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return true;
-            }
-        } catch (SQLException e) {
-            System.out.println("Error al buscar el producto: " + e.getMessage());
-        }
-        return false;
-    }
+    /**
+     * ********************************************************************
+     * metodo para consultar si el producto ya esta registrado en la BBDD
+     * ********************************************************************
+     */
+    public boolean existeProducto(String producto) {
+        boolean respuesta = false;
+        String sql = "select nombre from tb_producto where nombre = '" + producto + "';";
+        Statement st;
 
-    public boolean actualizarProducto(int producto_id, int proveedor_id, int categoria_id, String nombre_producto, String descripcion_producto, String fecha_orden) {
         try {
-            Connection con = Conexion.getConexion();
-            PreparedStatement ps = con.prepareStatement("UPDATE Productos SET proveedor_id = ?, categoria_id = ?, nombre_producto = ?, descripcion_producto = ?, fecha_orden = ? WHERE producto_id = ?");
-            ps.setInt(1, proveedor_id);
-            ps.setInt(2, categoria_id);
-            ps.setString(3, nombre_producto);
-            ps.setString(4, descripcion_producto);
-            ps.setString(5, fecha_orden);
-            ps.setInt(6, producto_id);
-            int result = ps.executeUpdate();
-            if (result > 0) {
-                return true;
+            Connection cn = Conexion.conectar();
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                respuesta = true;
             }
-        } catch (SQLException e) {
-            System.out.println("Error al actualizar el producto: " + e.getMessage());
-        }
-        return false;
-    }
 
-    public boolean eliminarProducto(int producto_id) {
+        } catch (SQLException e) {
+            System.out.println("Error al consultar producto: " + e);
+        }
+        return respuesta;
+    }
+    
+     /**
+     * **************************************************
+     * metodo para actualizar un producto
+     * **************************************************
+     */
+    public boolean actualizar(Producto objeto, int idProducto) {
+        boolean respuesta = false;
+        Connection cn = Conexion.conectar();
         try {
-            Connection con = Conexion.getConexion();
-            PreparedStatement ps = con.prepareStatement("DELETE FROM Productos WHERE producto_id = ?");
-            ps.setInt(1, producto_id);
-            int result = ps.executeUpdate();
-            if (result > 0) {
-                return true;
-            }
-        } catch (SQLException e) {
-            System.out.println("Error al eliminar el producto: " + e.getMessage());
-        }
-        return false;
-    }
 
-    public boolean actualizarStock(int producto_id, int cantidad) {
+            PreparedStatement consulta = cn.prepareStatement("update tb_producto set nombre=?, cantidad = ?, precio = ?, descripcion= ?, porcentajeIva = ?, idCategoria = ?, estado = ? where idProducto ='" + idProducto + "'");
+            consulta.setString(1, objeto.getNombre());
+            consulta.setInt(2, objeto.getCantidad());
+            consulta.setDouble(3, objeto.getPrecio());
+            consulta.setString(4, objeto.getDescripcion());
+            consulta.setInt(5, objeto.getPorcentajeIva());
+            consulta.setInt(6, objeto.getIdCategoria());
+            consulta.setInt(7, objeto.getEstado());
+           
+            if (consulta.executeUpdate() > 0) {
+                respuesta = true;
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar producto: " + e);
+        }
+        return respuesta;
+    }
+    
+    
+    /**
+     * **************************************************
+     * metodo para eliminar un producto
+     * **************************************************
+     */
+    public boolean eliminar(int idProducto) {
+        boolean respuesta = false;
+        Connection cn = Conexion.conectar();
         try {
-            Connection con = Conexion.getConexion();
-            PreparedStatement ps = con.prepareStatement("UPDATE Productos SET stock = stock + ? WHERE producto_id = ?");
-            ps.setInt(1, cantidad);
-            ps.setInt(2, producto_id);
-            int result = ps.executeUpdate();
-            if (result > 0) {
-                return true;
+            PreparedStatement consulta = cn.prepareStatement(
+                    "delete from tb_producto where idProducto ='" + idProducto + "'");
+            consulta.executeUpdate();
+           
+            if (consulta.executeUpdate() > 0) {
+                respuesta = true;
             }
+            cn.close();
         } catch (SQLException e) {
-            System.out.println("Error al actualizar el stock del producto: " + e.getMessage());
+            System.out.println("Error al eliminar producto: " + e);
         }
-        return false;
+        return respuesta;
     }
+    
+    /**
+     * **************************************************
+     * metodo para actualizar stock un producto
+     * **************************************************
+     */
+    
+     public boolean actualizarStock(Producto object, int idProducto) {
+        boolean respuesta = false;
+        Connection cn = Conexion.conectar();
+        try {
+            PreparedStatement consulta = cn.prepareStatement("update tb_producto set cantidad=? where idProducto ='" + idProducto + "'");
+            consulta.setInt(1, object.getCantidad());
 
-    public boolean existeProducto(String trim) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            if (consulta.executeUpdate() > 0) {
+                respuesta = true;
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar stock del producto: " + e);
+        }
+        return respuesta;
     }
 }

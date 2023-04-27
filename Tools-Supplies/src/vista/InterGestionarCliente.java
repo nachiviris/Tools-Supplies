@@ -2,7 +2,6 @@ package vista;
 
 import conexion.Conexion;
 import controlador.Ctrl_Cliente;
-import controlador.Ctrl_Usuario;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -17,22 +16,21 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cliente;
-import modelo.Usuario;
 
 /**
  *
  * @author ediso
  */
-public class InterGestionarUsuario extends javax.swing.JInternalFrame {
+public class InterGestionarCliente extends javax.swing.JInternalFrame {
 
-    private int idUsuario = 0;
+    private int idCliente;
 
-    public InterGestionarUsuario() {
+    public InterGestionarCliente() {
         initComponents();
         this.setSize(new Dimension(900, 500));
-        this.setTitle("Gestionar Usuarios");
+        this.setTitle("Gestionar Clientes");
         //Cargar tabla
-        this.CargarTablaUsuarios();
+        this.CargarTablaClientes();
 
         //insertar imagen en nuestro JLabel
         ImageIcon wallpaper = new ImageIcon("src/img/fondo3.jpg");
@@ -54,7 +52,7 @@ public class InterGestionarUsuario extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable_usuarios = new javax.swing.JTable();
+        jTable_clientes = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jButton_actualizar = new javax.swing.JButton();
         jButton_eliminar = new javax.swing.JButton();
@@ -65,10 +63,10 @@ public class InterGestionarUsuario extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txt_password = new javax.swing.JTextField();
-        txt_apellido = new javax.swing.JTextField();
         txt_telefono = new javax.swing.JTextField();
-        txt_usuario = new javax.swing.JTextField();
+        txt_apellido = new javax.swing.JTextField();
+        txt_direccion = new javax.swing.JTextField();
+        txt_cedula = new javax.swing.JTextField();
         jLabel_wallpaper = new javax.swing.JLabel();
 
         setClosable(true);
@@ -77,14 +75,14 @@ public class InterGestionarUsuario extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Administrar Usuarios");
+        jLabel1.setText("Administrar Clientes");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable_usuarios.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_clientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -95,7 +93,7 @@ public class InterGestionarUsuario extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable_usuarios);
+        jScrollPane1.setViewportView(jTable_clientes);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 710, 250));
 
@@ -141,7 +139,7 @@ public class InterGestionarUsuario extends javax.swing.JInternalFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Password:");
+        jLabel3.setText("Teléfono:");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 90, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -151,25 +149,25 @@ public class InterGestionarUsuario extends javax.swing.JInternalFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Telefono:");
+        jLabel5.setText("Dirección:");
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, 90, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("Usuario:");
+        jLabel6.setText("Cedula:");
         jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 10, 90, -1));
 
-        txt_password.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel3.add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 170, -1));
+        txt_telefono.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel3.add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 170, -1));
 
         txt_apellido.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPanel3.add(txt_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 170, -1));
 
-        txt_telefono.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel3.add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, 170, -1));
+        txt_direccion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel3.add(txt_direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, 170, -1));
 
-        txt_usuario.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel3.add(txt_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, 170, -1));
+        txt_cedula.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel3.add(txt_cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, 170, -1));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 870, 100));
         getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 470));
@@ -178,53 +176,49 @@ public class InterGestionarUsuario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_actualizarActionPerformed
-        Usuario usuario = new Usuario();
-        Ctrl_Usuario controlUsuario = new Ctrl_Usuario();
 
-        if (idUsuario == 0) {
-            JOptionPane.showMessageDialog(null, "¡Seleccione un Usuario!");
+        if (txt_nombre.getText().isEmpty() && txt_apellido.getText().isEmpty()
+                && txt_cedula.getText().isEmpty() && txt_telefono.getText().isEmpty() && txt_direccion.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "¡Completa todos los campos!");
         } else {
-            if (txt_nombre.getText().isEmpty() || txt_apellido.getText().isEmpty() || txt_usuario.getText().isEmpty()
-                    || txt_password.getText().isEmpty() || txt_telefono.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "¡Completa todos los campos!");
 
+            Cliente cliente = new Cliente();
+            Ctrl_Cliente controlCliente = new Ctrl_Cliente();
+
+            cliente.setNombre(txt_nombre.getText().trim());
+            cliente.setApellido(txt_apellido.getText().trim());
+            cliente.setCedula(txt_cedula.getText().trim());
+            cliente.setTelefono(txt_telefono.getText().trim());
+            cliente.setDireccion(txt_direccion.getText().trim());
+
+            if (controlCliente.actualizar(cliente, idCliente)) {
+                JOptionPane.showMessageDialog(null, "¡Datos del cliente actualizados!");
+                this.CargarTablaClientes();
+                this.Limpiar();
             } else {
-                usuario.setNombre(txt_nombre.getText().trim());
-                usuario.setApellido(txt_apellido.getText().trim());
-                usuario.setUsuario(txt_usuario.getText().trim());
-                usuario.setPassword(txt_password.getText().trim());
-                usuario.setTelefono(txt_telefono.getText().trim());
-                usuario.setEstado(1);
-                
-                if(controlUsuario.actualizar(usuario, idUsuario)){
-                    JOptionPane.showMessageDialog(null, "¡Actualizacion Exitosa!");
-                    this.Limpiar();
-                    this.CargarTablaUsuarios();
-                    idUsuario = 0;
-                    
-                }else{
-                    JOptionPane.showMessageDialog(null, "¡Error al Actualizar usuario!");
-                }
+                JOptionPane.showMessageDialog(null, "¡Error al actualizar!");
             }
+
         }
+
     }//GEN-LAST:event_jButton_actualizarActionPerformed
 
     private void jButton_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_eliminarActionPerformed
 
-        Ctrl_Usuario controlUsuario = new Ctrl_Usuario();
-        if (idUsuario == 0) {
-            JOptionPane.showMessageDialog(null, "¡Seleccione un usuario!");
+        Ctrl_Cliente controlCliente = new Ctrl_Cliente();
+        if (idCliente == 0) {
+            JOptionPane.showMessageDialog(null, "¡Seleccione un cliente!");
         } else {
-            if (!controlUsuario.eliminar(idUsuario)) {
-                JOptionPane.showMessageDialog(null, "¡Usuario Eliminado!");
-                this.CargarTablaUsuarios();
+            if (!controlCliente.eliminar(idCliente)) {
+                JOptionPane.showMessageDialog(null, "¡Cliente Eliminado!");
+                this.CargarTablaClientes();
                 this.Limpiar();
-                idUsuario = 0;
             } else {
-                JOptionPane.showMessageDialog(null, "¡Error al eliminar usuario!");
+                JOptionPane.showMessageDialog(null, "¡Error al eliminar cliente!");
                 this.Limpiar();
             }
         }
+
     }//GEN-LAST:event_jButton_eliminarActionPerformed
 
 
@@ -242,12 +236,12 @@ public class InterGestionarUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     public static javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTable jTable_usuarios;
+    public static javax.swing.JTable jTable_clientes;
     private javax.swing.JTextField txt_apellido;
+    private javax.swing.JTextField txt_cedula;
+    private javax.swing.JTextField txt_direccion;
     private javax.swing.JTextField txt_nombre;
-    private javax.swing.JTextField txt_password;
     private javax.swing.JTextField txt_telefono;
-    private javax.swing.JTextField txt_usuario;
     // End of variables declaration//GEN-END:variables
 
     /*
@@ -257,10 +251,10 @@ public class InterGestionarUsuario extends javax.swing.JInternalFrame {
      */
     private void Limpiar() {
         txt_nombre.setText("");
-        txt_password.setText("");
-        txt_apellido.setText("");
         txt_telefono.setText("");
-        txt_usuario.setText("");
+        txt_apellido.setText("");
+        txt_direccion.setText("");
+        txt_cedula.setText("");
     }
 
 
@@ -269,23 +263,23 @@ public class InterGestionarUsuario extends javax.swing.JInternalFrame {
      * metodo para mostrar todos los clientes registrados
      * *****************************************************
      */
-    private void CargarTablaUsuarios() {
+    private void CargarTablaClientes() {
         Connection con = Conexion.conectar();
         DefaultTableModel model = new DefaultTableModel();
-        String sql = "select * from tb_usuario";
+        String sql = "select * from tb_cliente";
         Statement st;
         try {
             st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
-            InterGestionarUsuario.jTable_usuarios = new JTable(model);
-            InterGestionarUsuario.jScrollPane1.setViewportView(InterGestionarUsuario.jTable_usuarios);
+            InterGestionarCliente.jTable_clientes = new JTable(model);
+            InterGestionarCliente.jScrollPane1.setViewportView(InterGestionarCliente.jTable_clientes);
 
             model.addColumn("N°");//ID
             model.addColumn("nombre");
             model.addColumn("apellido");
-            model.addColumn("usuario");
-            model.addColumn("password");
+            model.addColumn("cedula");
             model.addColumn("telefono");
+            model.addColumn("direccion");
             model.addColumn("estado");
 
             while (rs.next()) {
@@ -297,19 +291,19 @@ public class InterGestionarUsuario extends javax.swing.JInternalFrame {
             }
             con.close();
         } catch (SQLException e) {
-            System.out.println("Error al llenar la tabla usuarios: " + e);
+            System.out.println("Error al llenar la tabla clientes: " + e);
         }
         //evento para obtener campo al cual el usuario da click
         //y obtener la interfaz que mostrara la informacion general
-        jTable_usuarios.addMouseListener(new MouseAdapter() {
+        jTable_clientes.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int fila_point = jTable_usuarios.rowAtPoint(e.getPoint());
+                int fila_point = jTable_clientes.rowAtPoint(e.getPoint());
                 int columna_point = 0;
 
                 if (fila_point > -1) {
-                    idUsuario = (int) model.getValueAt(fila_point, columna_point);
-                    EnviarDatosUsuarioSeleccionado(idUsuario);//metodo
+                    idCliente = (int) model.getValueAt(fila_point, columna_point);
+                    EnviarDatosClienteSeleccionado(idCliente);//metodo
                 }
             }
         });
@@ -321,22 +315,22 @@ public class InterGestionarUsuario extends javax.swing.JInternalFrame {
      * Metodo que envia datos seleccionados
      * **************************************************
      */
-    private void EnviarDatosUsuarioSeleccionado(int idUsuario) {
+    private void EnviarDatosClienteSeleccionado(int idCliente) {
         try {
             Connection con = Conexion.conectar();
             PreparedStatement pst = con.prepareStatement(
-                    "select * from tb_usuario where idUsuario = '" + idUsuario + "'");
+                    "select * from tb_cliente where idCliente = '" + idCliente + "'");
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 txt_nombre.setText(rs.getString("nombre"));
                 txt_apellido.setText(rs.getString("apellido"));
-                txt_usuario.setText(rs.getString("usuario"));
-                txt_password.setText(rs.getString("password"));
+                txt_cedula.setText(rs.getString("cedula"));
                 txt_telefono.setText(rs.getString("telefono"));
+                txt_direccion.setText(rs.getString("direccion"));
             }
             con.close();
         } catch (SQLException e) {
-            System.out.println("Error al seleccionar usuario: " + e);
+            System.out.println("Error al seleccionar cliente: " + e);
         }
     }
 

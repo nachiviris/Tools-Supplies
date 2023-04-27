@@ -16,3 +16,17 @@ GRANT ALTER SYSTEM TO system_ts;
 INSERT INTO Usuario (usuario_id, nombre_usuario, apellido_usuario, usuario, password, estado)
 VALUES (1, 'Jose', 'Bernal', 'jose', '123', 1);
 
+drop table usuario;
+
+CREATE TABLE Usuario (
+    usuario_id INT NOT NULL CONSTRAINT PK_USU_ID PRIMARY KEY USING INDEX TABLESPACE TBS_TS_IDX,
+    nombre_usuario VARCHAR2(50) NOT NULL,
+    apellido_usuario VARCHAR2(100),
+    usuario VARCHAR2(50),
+    password VARCHAR2(40),
+    estado INT NOT NULL
+)TABLESPACE TBS_TS_DATA;
+
+select * from usuario;
+
+COMMIT;

@@ -1,64 +1,54 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
 
 /**
  *
- * @author Nacho
+ * @author ediso
  */
 public class Usuario {
-    
-    private int usuario_id;
-    private String nombre_usuario;
-    private String apellido_usuario;
+
+    //Atributos
+    private int idUsuario;
+    private String nombre;
+    private String apellido;
     private String usuario;
     private String password;
+    private String telefono;
     private int estado;
 
-    public Usuario(int usuario_id, String nombre_usuario, String apellido_usuario, String usuario, String password, int estado) {
-        this.usuario_id = usuario_id;
-        this.nombre_usuario = nombre_usuario;
-        this.apellido_usuario = apellido_usuario;
-        this.usuario = usuario;
-        this.password = password;
-        this.estado = estado;
-    }
-
-
+    //Contructor vacío
     public Usuario() {
-        this.usuario_id = 0;
-        this.nombre_usuario = "";
-        this.apellido_usuario = "";
+        this.idUsuario = 0;
+        this.nombre = "";
+        this.apellido = "";
         this.usuario = "";
         this.password = "";
+        this.telefono = "";
         this.estado = 0;
     }
 
-   
-    public int getUsuario_id() {
-        return usuario_id;
+    //set and get
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setUsuario_id(int usuario_id) {
-        this.usuario_id = usuario_id;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public String getNombre_usuario() {
-        return nombre_usuario;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombre_usuario(String nombre_usuario) {
-        this.nombre_usuario = nombre_usuario;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getApellido_usuario() {
-        return apellido_usuario;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setApellido_usuario(String apellido_usuario) {
-        this.apellido_usuario = apellido_usuario;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getUsuario() {
@@ -77,6 +67,14 @@ public class Usuario {
         this.password = password;
     }
 
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
     public int getEstado() {
         return estado;
     }
@@ -85,7 +83,4 @@ public class Usuario {
         this.estado = estado;
     }
 
-  
-   
-    
 }

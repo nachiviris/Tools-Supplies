@@ -1,8 +1,7 @@
 package vista;
 
 import conexion.Conexion;
-import controlador.Ctrl_Cliente;
-import controlador.Ctrl_Usuario;
+import controlador.Ctrl_RegistrarVenta;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -16,23 +15,24 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import modelo.Cliente;
-import modelo.Usuario;
+import modelo.CabeceraVenta;
 
 /**
  *
  * @author ediso
  */
-public class InterGestionarUsuario extends javax.swing.JInternalFrame {
+public class InterGestionarVentas extends javax.swing.JInternalFrame {
 
-    private int idUsuario = 0;
+    private int idCliente = 0;
+    private int idVenta;
 
-    public InterGestionarUsuario() {
+    public InterGestionarVentas() {
         initComponents();
         this.setSize(new Dimension(900, 500));
-        this.setTitle("Gestionar Usuarios");
+        this.setTitle("Gestionar Ventas");
         //Cargar tabla
-        this.CargarTablaUsuarios();
+        this.CargarComboClientes();
+        this.CargarTablaVentas();
 
         //insertar imagen en nuestro JLabel
         ImageIcon wallpaper = new ImageIcon("src/img/fondo3.jpg");
@@ -54,21 +54,18 @@ public class InterGestionarUsuario extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable_usuarios = new javax.swing.JTable();
+        jTable_ventas = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jButton_actualizar = new javax.swing.JButton();
-        jButton_eliminar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        txt_nombre = new javax.swing.JTextField();
+        txt_total_pagar = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        txt_password = new javax.swing.JTextField();
-        txt_apellido = new javax.swing.JTextField();
-        txt_telefono = new javax.swing.JTextField();
-        txt_usuario = new javax.swing.JTextField();
+        txt_fecha = new javax.swing.JTextField();
+        jComboBox_cliente = new javax.swing.JComboBox<>();
+        jComboBox_estado = new javax.swing.JComboBox<>();
         jLabel_wallpaper = new javax.swing.JLabel();
 
         setClosable(true);
@@ -77,14 +74,14 @@ public class InterGestionarUsuario extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Administrar Usuarios");
+        jLabel1.setText("Administrar Ventas");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable_usuarios.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_ventas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -95,7 +92,7 @@ public class InterGestionarUsuario extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable_usuarios);
+        jScrollPane1.setViewportView(jTable_ventas);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 710, 250));
 
@@ -115,16 +112,6 @@ public class InterGestionarUsuario extends javax.swing.JInternalFrame {
         });
         jPanel2.add(jButton_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        jButton_eliminar.setBackground(new java.awt.Color(255, 51, 51));
-        jButton_eliminar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton_eliminar.setText("Eliminar");
-        jButton_eliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_eliminarActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 90, -1));
-
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 50, 130, 270));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -133,43 +120,39 @@ public class InterGestionarUsuario extends javax.swing.JInternalFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Nombre:");
+        jLabel2.setText("Total Pagar:");
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, -1));
 
-        txt_nombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel3.add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 170, -1));
+        txt_total_pagar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_total_pagar.setEnabled(false);
+        jPanel3.add(txt_total_pagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 170, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Password:");
+        jLabel3.setText("Fecha:");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 90, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("Apellido:");
+        jLabel4.setText("Cliente:");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 90, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Telefono:");
+        jLabel5.setText("Estado:");
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, 90, -1));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("Usuario:");
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 10, 90, -1));
+        txt_fecha.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_fecha.setEnabled(false);
+        jPanel3.add(txt_fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 170, -1));
 
-        txt_password.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel3.add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 170, -1));
+        jComboBox_cliente.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jComboBox_cliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione cliente:", "Item 2", "Item 3", "Item 4" }));
+        jPanel3.add(jComboBox_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, 170, -1));
 
-        txt_apellido.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel3.add(txt_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 170, -1));
-
-        txt_telefono.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel3.add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, 170, -1));
-
-        txt_usuario.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel3.add(txt_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, 170, -1));
+        jComboBox_estado.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jComboBox_estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Inactivo" }));
+        jPanel3.add(jComboBox_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, 170, -1));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 870, 100));
         getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 470));
@@ -178,76 +161,67 @@ public class InterGestionarUsuario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_actualizarActionPerformed
-        Usuario usuario = new Usuario();
-        Ctrl_Usuario controlUsuario = new Ctrl_Usuario();
 
-        if (idUsuario == 0) {
-            JOptionPane.showMessageDialog(null, "¡Seleccione un Usuario!");
-        } else {
-            if (txt_nombre.getText().isEmpty() || txt_apellido.getText().isEmpty() || txt_usuario.getText().isEmpty()
-                    || txt_password.getText().isEmpty() || txt_telefono.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "¡Completa todos los campos!");
+        CabeceraVenta cabeceraVenta = new CabeceraVenta();
+        Ctrl_RegistrarVenta controlRegistrarVenta = new Ctrl_RegistrarVenta();
+        String cliente, estado;
+        cliente = jComboBox_cliente.getSelectedItem().toString().trim();
+        estado = jComboBox_estado.getSelectedItem().toString().trim();
 
-            } else {
-                usuario.setNombre(txt_nombre.getText().trim());
-                usuario.setApellido(txt_apellido.getText().trim());
-                usuario.setUsuario(txt_usuario.getText().trim());
-                usuario.setPassword(txt_password.getText().trim());
-                usuario.setTelefono(txt_telefono.getText().trim());
-                usuario.setEstado(1);
-                
-                if(controlUsuario.actualizar(usuario, idUsuario)){
-                    JOptionPane.showMessageDialog(null, "¡Actualizacion Exitosa!");
-                    this.Limpiar();
-                    this.CargarTablaUsuarios();
-                    idUsuario = 0;
-                    
-                }else{
-                    JOptionPane.showMessageDialog(null, "¡Error al Actualizar usuario!");
-                }
+        //obtener el id del cliente
+        try {
+            Connection cn = Conexion.conectar();
+            PreparedStatement pst = cn.prepareStatement(
+                    "select idCliente, concat(nombre, ' ', apellido) as cliente "
+                    + "from tb_cliente where concat(nombre, ' ', apellido) = '" + cliente + "'");
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                idCliente = rs.getInt("idCliente");
             }
+            cn.close();
+        } catch (SQLException e) {
+            System.out.println("Error en cargar el id cliente: " + e);
+        }
+
+        //Actualizar datos
+        if (!cliente.equalsIgnoreCase("Seleccione cliente:")) {
+            cabeceraVenta.setIdCliente(idCliente);
+            if (estado.equalsIgnoreCase("Activo")) {
+                cabeceraVenta.setEstado(1);
+            } else {
+                cabeceraVenta.setEstado(0);
+            }
+
+            if (controlRegistrarVenta.actualizar(cabeceraVenta, idVenta)) {
+                JOptionPane.showMessageDialog(null, "¡Registro Actualizado!");
+                this.CargarTablaVentas();
+                this.Limpiar();
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al Actualizar");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione un registro para actualizar datos");
         }
     }//GEN-LAST:event_jButton_actualizarActionPerformed
-
-    private void jButton_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_eliminarActionPerformed
-
-        Ctrl_Usuario controlUsuario = new Ctrl_Usuario();
-        if (idUsuario == 0) {
-            JOptionPane.showMessageDialog(null, "¡Seleccione un usuario!");
-        } else {
-            if (!controlUsuario.eliminar(idUsuario)) {
-                JOptionPane.showMessageDialog(null, "¡Usuario Eliminado!");
-                this.CargarTablaUsuarios();
-                this.Limpiar();
-                idUsuario = 0;
-            } else {
-                JOptionPane.showMessageDialog(null, "¡Error al eliminar usuario!");
-                this.Limpiar();
-            }
-        }
-    }//GEN-LAST:event_jButton_eliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_actualizar;
-    private javax.swing.JButton jButton_eliminar;
+    private javax.swing.JComboBox<String> jComboBox_cliente;
+    private javax.swing.JComboBox<String> jComboBox_estado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel_wallpaper;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     public static javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTable jTable_usuarios;
-    private javax.swing.JTextField txt_apellido;
-    private javax.swing.JTextField txt_nombre;
-    private javax.swing.JTextField txt_password;
-    private javax.swing.JTextField txt_telefono;
-    private javax.swing.JTextField txt_usuario;
+    public static javax.swing.JTable jTable_ventas;
+    private javax.swing.JTextField txt_fecha;
+    private javax.swing.JTextField txt_total_pagar;
     // End of variables declaration//GEN-END:variables
 
     /*
@@ -256,11 +230,11 @@ public class InterGestionarUsuario extends javax.swing.JInternalFrame {
      * *****************************************************
      */
     private void Limpiar() {
-        txt_nombre.setText("");
-        txt_password.setText("");
-        txt_apellido.setText("");
-        txt_telefono.setText("");
-        txt_usuario.setText("");
+        this.txt_total_pagar.setText("");
+        this.txt_fecha.setText("");
+        this.jComboBox_cliente.setSelectedItem("Seleccione cliente:");
+        this.jComboBox_estado.setSelectedItem("Activo");
+        idCliente = 0;
     }
 
 
@@ -269,47 +243,56 @@ public class InterGestionarUsuario extends javax.swing.JInternalFrame {
      * metodo para mostrar todos los clientes registrados
      * *****************************************************
      */
-    private void CargarTablaUsuarios() {
+    private void CargarTablaVentas() {
         Connection con = Conexion.conectar();
         DefaultTableModel model = new DefaultTableModel();
-        String sql = "select * from tb_usuario";
+        String sql = "select cv.idCabeceraVenta as id, concat(c.nombre, ' ', c.apellido) as cliente, "
+                + "cv.valorPagar as total, cv.fechaVenta as fecha, cv.estado "
+                + "from tb_cabecera_venta as cv, tb_cliente as c where cv.idCliente = c.idCliente;";
         Statement st;
         try {
             st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
-            InterGestionarUsuario.jTable_usuarios = new JTable(model);
-            InterGestionarUsuario.jScrollPane1.setViewportView(InterGestionarUsuario.jTable_usuarios);
+            InterGestionarVentas.jTable_ventas = new JTable(model);
+            InterGestionarVentas.jScrollPane1.setViewportView(InterGestionarVentas.jTable_ventas);
 
             model.addColumn("N°");//ID
-            model.addColumn("nombre");
-            model.addColumn("apellido");
-            model.addColumn("usuario");
-            model.addColumn("password");
-            model.addColumn("telefono");
+            model.addColumn("Cliente");
+            model.addColumn("Total Pagar");
+            model.addColumn("Fecha Venta");
             model.addColumn("estado");
 
             while (rs.next()) {
-                Object fila[] = new Object[7];
-                for (int i = 0; i < 7; i++) {
-                    fila[i] = rs.getObject(i + 1);
+                Object fila[] = new Object[5];
+                for (int i = 0; i < 5; i++) {
+                    if (i == 4) {
+                        String estado = String.valueOf(rs.getObject(i + 1));
+                        if (estado.equalsIgnoreCase("1")) {
+                            fila[i] = "Activo";
+                        } else {
+                            fila[i] = "Inactivo";
+                        }
+                    } else {
+                        fila[i] = rs.getObject(i + 1);
+                    }
                 }
                 model.addRow(fila);
             }
             con.close();
         } catch (SQLException e) {
-            System.out.println("Error al llenar la tabla usuarios: " + e);
+            System.out.println("Error al llenar la tabla de ventas: " + e);
         }
         //evento para obtener campo al cual el usuario da click
         //y obtener la interfaz que mostrara la informacion general
-        jTable_usuarios.addMouseListener(new MouseAdapter() {
+        jTable_ventas.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int fila_point = jTable_usuarios.rowAtPoint(e.getPoint());
+                int fila_point = jTable_ventas.rowAtPoint(e.getPoint());
                 int columna_point = 0;
 
                 if (fila_point > -1) {
-                    idUsuario = (int) model.getValueAt(fila_point, columna_point);
-                    EnviarDatosUsuarioSeleccionado(idUsuario);//metodo
+                    idVenta = (int) model.getValueAt(fila_point, columna_point);
+                    EnviarDatosVentaSeleccionada(idVenta);//metodo
                 }
             }
         });
@@ -321,22 +304,49 @@ public class InterGestionarUsuario extends javax.swing.JInternalFrame {
      * Metodo que envia datos seleccionados
      * **************************************************
      */
-    private void EnviarDatosUsuarioSeleccionado(int idUsuario) {
+    private void EnviarDatosVentaSeleccionada(int idVenta) {
         try {
             Connection con = Conexion.conectar();
             PreparedStatement pst = con.prepareStatement(
-                    "select * from tb_usuario where idUsuario = '" + idUsuario + "'");
+                    "select cv.idCabeceraVenta, cv.idCliente, concat(c.nombre, ' ', c.apellido) as cliente, "
+                    + "cv.valorPagar, cv.fechaVenta, cv.estado  from tb_cabecera_venta as cv, "
+                    + "tb_cliente as c where  cv.idCabeceraVenta = '" + idVenta + "' and cv.idCliente = c.idCliente;");
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                txt_nombre.setText(rs.getString("nombre"));
-                txt_apellido.setText(rs.getString("apellido"));
-                txt_usuario.setText(rs.getString("usuario"));
-                txt_password.setText(rs.getString("password"));
-                txt_telefono.setText(rs.getString("telefono"));
+                jComboBox_cliente.setSelectedItem(rs.getString("cliente"));
+                txt_total_pagar.setText(rs.getString("valorPagar"));
+                txt_fecha.setText(rs.getString("fechaVenta"));
+                int estado = rs.getInt("estado");
+                if (estado == 1) {
+                    jComboBox_estado.setSelectedItem("Activo");
+                } else {
+                    jComboBox_estado.setSelectedItem("Inactivo");
+                }
             }
             con.close();
         } catch (SQLException e) {
-            System.out.println("Error al seleccionar usuario: " + e);
+            System.out.println("Error al seleccionar venta: " + e);
+        }
+    }
+
+    /*
+    Metodo para cargar los clientes en el jComboBox
+     */
+    private void CargarComboClientes() {
+        Connection cn = Conexion.conectar();
+        String sql = "select * from tb_cliente";
+        Statement st;
+        try {
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            jComboBox_cliente.removeAllItems();
+            jComboBox_cliente.addItem("Seleccione cliente:");
+            while (rs.next()) {
+                jComboBox_cliente.addItem(rs.getString("nombre") + " " + rs.getString("apellido"));
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.out.println("¡Error al cargar clientes, !" + e);
         }
     }
 

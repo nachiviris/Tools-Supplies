@@ -1,85 +1,112 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
 
 /**
  *
- * @author crist
+ * @author ediso
  */
 public class Producto {
-    private int producto_id;
-    private int proveedor_id;
-    private int categoria_id;
-    private String nombre_producto;
-    private String descripcion_producto;
-
-    public Producto(int producto_id, int proveedor_id, int categoria_id, String nombre_producto, String descripcion_producto) {
-        this.producto_id = producto_id;
-        this.proveedor_id = proveedor_id;
-        this.categoria_id = categoria_id;
-        this.nombre_producto = nombre_producto;
-        this.descripcion_producto = descripcion_producto;
-    }
- public Producto () {
-     this.producto_id = 0;
-        this.nombre_producto = "";
-        this.descripcion_producto = "";
-        this.categoria_id = 0;
-        this.proveedor_id = 0;
-        
- }
     
+    //Atributos
+    private int idProducto;
+    private String nombre;
+    private int cantidad;
+    private double precio;
+    private String descripcion;
+    private int porcentajeIva;
+    private int idCategoria;
+    private int estado;
+    
+    //Contructor
+    public Producto(){
+        this.idProducto = 0;
+        this.nombre = "";
+        this.cantidad = 0;
+        this.precio = 0.0;
+        this.descripcion = "";
+        this.porcentajeIva = 0;
+        this.idCategoria = 0;
+        this.estado = 0;
+    }
+    //Contructor sobrecargado
+    public Producto(int idProducto, String nombre, int cantidad, double precio, String descripcion, int porcentajeIva, int idCategoria, int estado) {
+        this.idProducto = idProducto;
+        this.nombre = nombre;
+        this.cantidad = cantidad;
+        this.precio = precio;
+        this.descripcion = descripcion;
+        this.porcentajeIva = porcentajeIva;
+        this.idCategoria = idCategoria;
+        this.estado = estado;
+    }
+    
+    //Set and get
 
-    public int getProducto_id() {
-        return producto_id;
+    public int getIdProducto() {
+        return idProducto;
     }
 
-    public void setProducto_id(int producto_id) {
-        this.producto_id = producto_id;
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
     }
 
-    public int getProveedor_id() {
-        return proveedor_id;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setProveedor_id(int proveedor_id) {
-        this.proveedor_id = proveedor_id;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public int getCategoria_id() {
-        return categoria_id;
+    public int getCantidad() {
+        return cantidad;
     }
 
-    public void setCategoria_id(int categoria_id) {
-        this.categoria_id = categoria_id;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
-    public String getNombre_producto() {
-        return nombre_producto;
+    public double getPrecio() {
+        return precio;
     }
 
-    public void setNombre_producto(String nombre_producto) {
-        this.nombre_producto = nombre_producto;
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 
-    public String getDescripcion_producto() {
-        return descripcion_producto;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setDescripcion_producto(String descripcion_producto) {
-        this.descripcion_producto = descripcion_producto;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    @Override
-    public String toString() {
-        return "Producto{" +
-                "producto_id=" + producto_id +
-                ", proveedor_id=" + proveedor_id +
-                ", categoria_id=" + categoria_id +
-                ", nombre_producto='" + nombre_producto + '\'' +
-                ", descripcion_producto='" + descripcion_producto + '\'' +
-                '}';
+    public int getPorcentajeIva() {
+        return porcentajeIva;
     }
+
+    public void setPorcentajeIva(int porcentajeIva) {
+        this.porcentajeIva = porcentajeIva;
+    }
+
+    public int getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(int idCategoria) {
+        this.idCategoria = idCategoria;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+    
+    
+    
+    
+    
 }

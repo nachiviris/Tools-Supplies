@@ -1,70 +1,97 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
 
 /**
  *
- * @author Nacho
+ * @author ediso
  */
 public class Cliente {
-    
-    private int cliente_id;
-    private String nombre_cliente;
-    private String direccion_cliente;
-    private String telefono_cliente;
-    private String correo_cliente;
+
+    //Atributos
+    private int idCliente;
+    private String nombre;
+    private String apellido;
+    private String cedula;
+    private String telefono;
+    private String direccion;
+    private int estado;
 
     //Constructor
-
-    public Cliente(int cliente_id, String nombre_cliente, String direccion_cliente, String telefono_cliente, String correo_cliente) {
-        this.cliente_id = cliente_id;
-        this.nombre_cliente = nombre_cliente;
-        this.direccion_cliente = direccion_cliente;
-        this.telefono_cliente = telefono_cliente;
-        this.correo_cliente = correo_cliente;
+    public Cliente() {
+        this.idCliente = 0;
+        this.nombre = "";
+        this.apellido = "";
+        this.cedula = "";
+        this.telefono = "";
+        this.direccion = "";
+        this.estado = 0;
     }
 
-    public int getCliente_id() {
-        return cliente_id;
+    //Constructor sobrecargado
+    public Cliente(int idCliente, String nombre, String apellido, String cedula, String telefono, String direccion, int estado) {
+        this.idCliente = idCliente;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.cedula = cedula;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.estado = estado;
     }
 
-    public void setCliente_id(int cliente_id) {
-        this.cliente_id = cliente_id;
+    //metodos set and get
+    public int getIdCliente() {
+        return idCliente;
     }
 
-    public String getNombre_cliente() {
-        return nombre_cliente;
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 
-    public void setNombre_cliente(String nombre_cliente) {
-        this.nombre_cliente = nombre_cliente;
+    public String getNombre() {
+        return nombre;
     }
 
-    public String getDireccion_cliente() {
-        return direccion_cliente;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public void setDireccion_cliente(String direccion_cliente) {
-        this.direccion_cliente = direccion_cliente;
+    public String getApellido() {
+        return apellido;
     }
 
-    public String getTelefono_cliente() {
-        return telefono_cliente;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
-    public void setTelefono_cliente(String telefono_cliente) {
-        this.telefono_cliente = telefono_cliente;
+    public String getCedula() {
+        return cedula;
     }
 
-    public String getCorreo_cliente() {
-        return correo_cliente;
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
     }
 
-    public void setCorreo_cliente(String correo_cliente) {
-        this.correo_cliente = correo_cliente;
+    public String getTelefono() {
+        return telefono;
     }
-    
-    
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
 }

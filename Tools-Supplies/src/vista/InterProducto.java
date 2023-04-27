@@ -1,34 +1,31 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package vista;
 
-
-
-import com.sun.jdi.connect.spi.Connection;
 import conexion.Conexion;
 import controlador.Ctrl_Producto;
-import java.io.IOException;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
-import java.sql.PreparedStatement;
-import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import modelo.Producto;
-
 
 /**
  *
- * @author crist
+ * @author ediso
  */
-public class InterProducto extends javax.swing.JPanel {
+public class InterProducto extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form InterProducto
-     */
+    int obtenerIdCategoriaCombo = 0;
+
     public InterProducto() {
         initComponents();
+        this.setSize(new Dimension(400, 300));
+        this.setTitle("Nuevo Producto");
+
+        this.CargarComboCategorias();
     }
 
     /**
@@ -40,294 +37,265 @@ public class InterProducto extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jInternalFrame1 = new javax.swing.JInternalFrame();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea4 = new javax.swing.JTextArea();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTextArea5 = new javax.swing.JTextArea();
-        txt_nombreProducto = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txt_nombre = new javax.swing.JTextField();
+        txt_cantidad = new javax.swing.JTextField();
+        txt_precio = new javax.swing.JTextField();
         txt_descripcion = new javax.swing.JTextField();
-        txt_idCategoria = new javax.swing.JTextField();
-        txt_idProveedor = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jComboBox_iva = new javax.swing.JComboBox<>();
+        jComboBox_categoria = new javax.swing.JComboBox<>();
+        jButton_Guardar = new javax.swing.JButton();
+        jLabel_wallpaper = new javax.swing.JLabel();
 
-        jInternalFrame1.setVisible(true);
+        setClosable(true);
+        setIconifiable(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Nuevo Producto");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, -1, -1));
 
-        jPanel1.setBackground(new java.awt.Color(51, 153, 255));
-        jPanel1.setToolTipText("");
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("Nombre:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 90, -1));
 
-        jScrollPane1.setBorder(null);
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("Cantidad:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 90, -1));
 
-        jTextArea1.setBackground(new java.awt.Color(51, 153, 255));
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 18)); // NOI18N
-        jTextArea1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Nuevo Producto");
-        jTextArea1.setToolTipText("");
-        jTextArea1.setCaretColor(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setViewportView(jTextArea1);
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setText("Precio:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 90, -1));
 
-        jScrollPane2.setBorder(null);
-        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel5.setText("Descripcion:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 90, -1));
 
-        jTextArea2.setBackground(new java.awt.Color(51, 153, 255));
-        jTextArea2.setColumns(20);
-        jTextArea2.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 14)); // NOI18N
-        jTextArea2.setLineWrap(true);
-        jTextArea2.setRows(5);
-        jTextArea2.setText("Nombre Producto:");
-        jTextArea2.setToolTipText("");
-        jTextArea2.setWrapStyleWord(true);
-        jTextArea2.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jScrollPane2.setViewportView(jTextArea2);
-        jTextArea2.getAccessibleContext().setAccessibleName("");
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel6.setText("IVA:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 90, -1));
 
-        jScrollPane3.setBorder(null);
-        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel7.setText("Categorias:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 90, -1));
 
-        jTextArea3.setBackground(new java.awt.Color(51, 153, 255));
-        jTextArea3.setColumns(20);
-        jTextArea3.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 14)); // NOI18N
-        jTextArea3.setLineWrap(true);
-        jTextArea3.setRows(5);
-        jTextArea3.setText("Descripcion:");
-        jTextArea3.setToolTipText("");
-        jTextArea3.setWrapStyleWord(true);
-        jTextArea3.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jScrollPane3.setViewportView(jTextArea3);
+        txt_nombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 170, -1));
 
-        jScrollPane4.setBorder(null);
-        jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane4.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        txt_cantidad.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        getContentPane().add(txt_cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 170, -1));
 
-        jTextArea4.setBackground(new java.awt.Color(51, 153, 255));
-        jTextArea4.setColumns(20);
-        jTextArea4.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 14)); // NOI18N
-        jTextArea4.setLineWrap(true);
-        jTextArea4.setRows(5);
-        jTextArea4.setText("ID Categoria:");
-        jTextArea4.setToolTipText("");
-        jTextArea4.setWrapStyleWord(true);
-        jTextArea4.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jScrollPane4.setViewportView(jTextArea4);
+        txt_precio.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        getContentPane().add(txt_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 170, -1));
 
-        jScrollPane5.setBorder(null);
-        jScrollPane5.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane5.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        txt_descripcion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        getContentPane().add(txt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 170, -1));
 
-        jTextArea5.setBackground(new java.awt.Color(51, 153, 255));
-        jTextArea5.setColumns(20);
-        jTextArea5.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 14)); // NOI18N
-        jTextArea5.setLineWrap(true);
-        jTextArea5.setRows(5);
-        jTextArea5.setText("ID Proveedor:");
-        jTextArea5.setToolTipText("");
-        jTextArea5.setWrapStyleWord(true);
-        jTextArea5.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jScrollPane5.setViewportView(jTextArea5);
+        jComboBox_iva.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jComboBox_iva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione iva:", "No grava iva", "12%", "14%" }));
+        getContentPane().add(jComboBox_iva, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 170, -1));
 
-        txt_nombreProducto.addActionListener(new java.awt.event.ActionListener() {
+        jComboBox_categoria.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jComboBox_categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione categoria:", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jComboBox_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 170, -1));
+
+        jButton_Guardar.setBackground(new java.awt.Color(0, 204, 204));
+        jButton_Guardar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton_Guardar.setText("Guardar");
+        jButton_Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_nombreProductoActionPerformed(evt);
+                jButton_GuardarActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton_Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 90, 30));
 
-        txt_descripcion.setToolTipText("");
-        txt_descripcion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_descripcionActionPerformed(evt);
-            }
-        });
+        jLabel_wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo3.jpg"))); // NOI18N
+        getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 280));
 
-        txt_idCategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_idCategoriaActionPerformed(evt);
-            }
-        });
-
-        txt_idProveedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_idProveedorActionPerformed(evt);
-            }
-        });
-
-        jButton1.setBackground(new java.awt.Color(153, 153, 153));
-        jButton1.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(115, 115, 115))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(txt_nombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_idCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_idProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(27, 27, 27))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(143, 143, 143))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_nombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txt_idCategoria)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_idProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        jPanel1.getAccessibleContext().setAccessibleName("");
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txt_nombreProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombreProductoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_nombreProductoActionPerformed
+    private void jButton_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GuardarActionPerformed
 
-    private void txt_descripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_descripcionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_descripcionActionPerformed
+        Producto producto = new Producto();
+        Ctrl_Producto controlProducto = new Ctrl_Producto();
+        String iva = "";
+        String categoria = "";
+        iva = jComboBox_iva.getSelectedItem().toString().trim();
+        categoria = jComboBox_categoria.getSelectedItem().toString().trim();
 
-    private void txt_idCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idCategoriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_idCategoriaActionPerformed
-
-    private void txt_idProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idProveedorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_idProveedorActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     
- if (txt_nombreProducto.getText().isEmpty() || txt_descripcion.getText().isEmpty() || txt_idCategoria.getText().isEmpty()
-                || txt_idProveedor.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Completa todos los campos");
+        //validar campos
+        if (txt_nombre.getText().equals("") || txt_cantidad.getText().equals("") || txt_precio.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Complete todos los campos");
+            txt_nombre.setBackground(Color.red);
+            txt_cantidad.setBackground(Color.red);
+            txt_precio.setBackground(Color.red);
         } else {
-            //validamos si el usuaro ya esta registrado
-            Producto producto = new Producto();
-            Ctrl_Producto controlProducto= new Ctrl_Producto();
-            if (!controlProducto.existeProducto(txt_nombreProducto.getText().trim())) {
-                //enviamos datos del usuario
-                producto.setNombre_producto(txt_nombreProducto.getText().trim());
-                producto.setDescripcion_producto(txt_descripcion.getText().trim());
-                producto.setCategoria_id(txt_idCategoria.getText().indexOf(WIDTH));
-                producto.setProveedor_id(txt_idProveedor.getText().indexOf(WIDTH));
-      
-                
-                if (controlProducto.guardarProducto(PROPERTIES, TOOL_TIP_TEXT_KEY, TOOL_TIP_TEXT_KEY, ABORT, PROPERTIES)){
-                    JOptionPane.showMessageDialog(null, "¡Producto Registrado!");
+            //consulta para ver si el producto ya existe
+            if (!controlProducto.existeProducto(txt_nombre.getText().trim())) {
+                if (iva.equalsIgnoreCase("Seleccione iva:")) {
+                    JOptionPane.showMessageDialog(null, "Seleccione iva.");
                 } else {
-                    JOptionPane.showMessageDialog(null, "¡Error al registrar Producto!");
+                    if (categoria.equalsIgnoreCase("Seleccione categoria:")) {
+                        JOptionPane.showMessageDialog(null, "Seleccione categoria");
+                    } else {
+                        try {
+                            producto.setNombre(txt_nombre.getText().trim());
+                            producto.setCantidad(Integer.parseInt(txt_cantidad.getText().trim()));
+                            String precioTXT = "";
+                            double Precio = 0.0;
+                            precioTXT = txt_precio.getText().trim();
+                            boolean aux = false;
+                            /*
+                            *Si el usuario ingresa , (coma) como punto decimal,
+                            lo transformamos a punto (.)
+                             */
+                            for (int i = 0; i < precioTXT.length(); i++) {
+                                if (precioTXT.charAt(i) == ',') {
+                                    String precioNuevo = precioTXT.replace(",", ".");
+                                    Precio = Double.parseDouble(precioNuevo);
+                                    aux = true;
+                                }
+                            }
+                            //evaluar la condicion
+                            if (aux == true) {
+                                producto.setPrecio(Precio);
+                            } else {
+                                Precio = Double.parseDouble(precioTXT);
+                                producto.setPrecio(Precio);
+                            }
+
+                            producto.setDescripcion(txt_descripcion.getText().trim());
+                            //Porcentaje IVA
+                            if (iva.equalsIgnoreCase("No grava iva")) {
+                                producto.setPorcentajeIva(0);
+                            } else if (iva.equalsIgnoreCase("12%")) {
+                                producto.setPorcentajeIva(12);
+                            } else if (iva.equalsIgnoreCase("14%")) {
+                                producto.setPorcentajeIva(14);
+                            }
+
+                            //idcategoria - cargar metodo que obtiene el id de categoria
+                            this.IdCategoria();
+                            producto.setIdCategoria(obtenerIdCategoriaCombo);
+                            producto.setEstado(1);
+
+                            if (controlProducto.guardar(producto)) {
+                                JOptionPane.showMessageDialog(null, "Registro Guardado");
+                                txt_nombre.setBackground(Color.green);
+                                txt_cantidad.setBackground(Color.green);
+                                txt_precio.setBackground(Color.green);
+                                txt_descripcion.setBackground(Color.green);
+
+                                this.CargarComboCategorias();
+                                this.jComboBox_iva.setSelectedItem("Seleccione iva:");
+                                this.Limpiar();
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Error al Guardar");
+                            }
+
+                        } catch (HeadlessException | NumberFormatException e) {
+                            System.out.println("Error en: " + e);
+                        }
+                    }
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "El Producto ya esta registrado, ingrese otro.");
+                JOptionPane.showMessageDialog(null, "El producto ya existe en la Base de Datos");
             }
         }
-        this.Limpiar();
-
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton_GuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextArea jTextArea4;
-    private javax.swing.JTextArea jTextArea5;
+    private javax.swing.JButton jButton_Guardar;
+    private javax.swing.JComboBox<String> jComboBox_categoria;
+    private javax.swing.JComboBox<String> jComboBox_iva;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel_wallpaper;
+    private javax.swing.JTextField txt_cantidad;
     private javax.swing.JTextField txt_descripcion;
-    private javax.swing.JTextField txt_idCategoria;
-    private javax.swing.JTextField txt_idProveedor;
-    private javax.swing.JTextField txt_nombreProducto;
+    private javax.swing.JTextField txt_nombre;
+    private javax.swing.JTextField txt_precio;
     // End of variables declaration//GEN-END:variables
-private void Limpiar() {
-        txt_nombreProducto.setText("");
+     /**
+     *
+     * Metodo para limpiar campos
+     */
+    private void Limpiar() {
+        txt_nombre.setText("");
+        txt_cantidad.setText("");
+        txt_precio.setText("");
         txt_descripcion.setText("");
-        txt_idCategoria.setText("");
-        txt_idProveedor.setText("");
+
+    }
+
+    /**
+     *
+     * Metodo para cargar las categorias
+     */
+    private void CargarComboCategorias() {
+        Connection cn = Conexion.conectar();
+        String sql = "select * from tb_categoria";
+        Statement st;
+
+        try {
+
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            jComboBox_categoria.removeAllItems();
+            jComboBox_categoria.addItem("Seleccione categoria:");
+            while (rs.next()) {
+                jComboBox_categoria.addItem(rs.getString("descripcion"));
+            }
+            cn.close();
+
+        } catch (SQLException e) {
+            System.out.println("Error al cargar categorias");
+        }
+    }
+
+    /**
+     *
+     * Metodo para obtener id categoria
+     */
+    private int IdCategoria() {
+        String sql = "select * from tb_categoria where descripcion = '" + this.jComboBox_categoria.getSelectedItem() + "'";
+        Statement st;
+        try {
+            Connection cn = Conexion.conectar();
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                obtenerIdCategoriaCombo = rs.getInt("idCategoria");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obener id categoria");
+        }
+        return obtenerIdCategoriaCombo;
     }
 }
