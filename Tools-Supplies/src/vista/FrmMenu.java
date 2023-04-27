@@ -59,8 +59,6 @@ public class FrmMenu extends javax.swing.JFrame {
         jMenuItem_reportes_categorias = new javax.swing.JMenuItem();
         jMenuItem_reportes_productos = new javax.swing.JMenuItem();
         jMenuItem_reportes_ventas = new javax.swing.JMenuItem();
-        jMenu7 = new javax.swing.JMenu();
-        jMenuItem_ver_historial = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem_cerrar_sesion = new javax.swing.JMenuItem();
 
@@ -278,24 +276,6 @@ public class FrmMenu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu6);
 
-        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/historial1.png"))); // NOI18N
-        jMenu7.setText("Historial");
-        jMenu7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jMenu7.setPreferredSize(new java.awt.Dimension(150, 50));
-
-        jMenuItem_ver_historial.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jMenuItem_ver_historial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/historial1.png"))); // NOI18N
-        jMenuItem_ver_historial.setText("Ver Historial");
-        jMenuItem_ver_historial.setPreferredSize(new java.awt.Dimension(150, 30));
-        jMenuItem_ver_historial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem_ver_historialActionPerformed(evt);
-            }
-        });
-        jMenu7.add(jMenuItem_ver_historial);
-
-        jMenuBar1.add(jMenu7);
-
         jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cerrar-sesion.png"))); // NOI18N
         jMenu8.setText("Cerrar Sesión");
         jMenu8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -409,12 +389,6 @@ public class FrmMenu extends javax.swing.JFrame {
         reporte.ReportesCategorias();
     }//GEN-LAST:event_jMenuItem_reportes_categoriasActionPerformed
 
-    private void jMenuItem_ver_historialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_ver_historialActionPerformed
-        InterGraficas interGraficas = new InterGraficas();
-        jDesktopPane_menu.add(interGraficas);
-        interGraficas.setVisible(true);
-    }//GEN-LAST:event_jMenuItem_ver_historialActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -458,7 +432,6 @@ public class FrmMenu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem15;
@@ -479,6 +452,5 @@ public class FrmMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem_reportes_clientes;
     private javax.swing.JMenuItem jMenuItem_reportes_productos;
     private javax.swing.JMenuItem jMenuItem_reportes_ventas;
-    private javax.swing.JMenuItem jMenuItem_ver_historial;
     // End of variables declaration//GEN-END:variables
 }

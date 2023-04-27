@@ -123,10 +123,7 @@ public class Reportes {
             try {
                 Connection cn = Conexion.conectar();
                 PreparedStatement pst = cn.prepareStatement(
-                        "select p.idProducto, p.nombre, p.cantidad, p.precio, p.descripcion, "
-                                + "p.porcentajeIva, c.descripcion as categoria, p.estado "
-                                + "from tb_producto as p, tb_categoria as c "
-                                + "where p.idCategoria = c.idCategoria;");
+                        "select * from vista_producto");
                 ResultSet rs = pst.executeQuery();
                 if (rs.next()) {
                     do {
@@ -250,10 +247,7 @@ public class Reportes {
             try {
                 Connection cn = Conexion.conectar();
                 PreparedStatement pst = cn.prepareStatement(
-                        "select cv.idCabeceraVenta as id, concat(c.nombre, ' ', c.apellido) as cliente, "
-                                + "cv.valorPagar as total, cv.fechaVenta as fecha, cv.estado "
-                                + "from tb_cabecera_venta as cv, tb_cliente as c "
-                                + "where cv.idCliente = c.idCliente;");
+                        "select * from vista_cabecera_venta");
                 ResultSet rs = pst.executeQuery();
                 if (rs.next()) {
                     do {
