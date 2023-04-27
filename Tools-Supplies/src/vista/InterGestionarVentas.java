@@ -172,10 +172,15 @@ public class InterGestionarVentas extends javax.swing.JInternalFrame {
         //obtener el id del cliente
         try {
             Connection cn = Conexion.conectar();
-            PreparedStatement pst = cn.prepareStatement(
-                    "select idCliente, concat(nombre, ' ', apellido) as cliente "
-                    + "from tb_cliente where concat(nombre, ' ', apellido) = '" + cliente + "'");
-            ResultSet rs = pst.executeQuery();
+           PreparedStatement pst = cn.prepareStatement(
+    "select idCliente from tb_cliente where nombre = ? and apellido = ?");
+            String nombre = null;
+pst.setString(1, nombre);
+            String apellido = null;
+pst.setString(2, apellido);
+ResultSet rs = pst.executeQuery();
+
+
             if (rs.next()) {
                 idCliente = rs.getInt("idCliente");
             }
