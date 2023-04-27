@@ -21,10 +21,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Edison Zambrano
- */
+
 public class Reportes {
 
     /* ********************************************************************
@@ -41,7 +38,7 @@ public class Reportes {
             //formato al texto
             Paragraph parrafo = new Paragraph();
             parrafo.setAlignment(Paragraph.ALIGN_CENTER);
-            parrafo.add("Reporte creado por \nEdison Zambrano © Programador Fantasma\n\n");
+            parrafo.add("Reporte creado por \nTools-Supplies\n\n");
             parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY));
             parrafo.add("Reporte de Clientes \n\n");
 
@@ -60,7 +57,7 @@ public class Reportes {
             try {
                 Connection cn = Conexion.conectar();
                 PreparedStatement pst = cn.prepareStatement(
-                        "select idCliente, concat(nombre, ' ', apellido) as nombres, cedula, telefono, direccion from tb_cliente");
+                        "select * from vista_clientes");
                 ResultSet rs = pst.executeQuery();
                 if (rs.next()) {
                     do {
@@ -103,7 +100,7 @@ public class Reportes {
             //formato al texto
             Paragraph parrafo = new Paragraph();
             parrafo.setAlignment(Paragraph.ALIGN_CENTER);
-            parrafo.add("Reporte creado por \nEdison Zambrano © Programador Fantasma\n\n");
+            parrafo.add("Reporte creado por \nTools-Supplies\n\n");
             parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY));
             parrafo.add("Reporte de Productos \n\n");
 
@@ -174,7 +171,7 @@ public class Reportes {
             //formato al texto
             Paragraph parrafo = new Paragraph();
             parrafo.setAlignment(Paragraph.ALIGN_CENTER);
-            parrafo.add("Reporte creado por \nEdison Zambrano © Programador Fantasma\n\n");
+            parrafo.add("Reporte creado por \nTools-Supplies\n\n");
             parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY));
             parrafo.add("Reporte de Categorias \n\n");
 
@@ -232,7 +229,7 @@ public class Reportes {
             //formato al texto
             Paragraph parrafo = new Paragraph();
             parrafo.setAlignment(Paragraph.ALIGN_CENTER);
-            parrafo.add("Reporte creado por \nEdison Zambrano © Programador Fantasma\n\n");
+            parrafo.add("Reporte creado por \nTools-Supplies\n\n");
             parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY));
             parrafo.add("Reporte de Ventas \n\n");
 

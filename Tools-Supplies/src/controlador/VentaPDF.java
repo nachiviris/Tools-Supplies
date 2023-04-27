@@ -25,10 +25,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import vista.InterFacturacion;
 
-/**
- *
- * @author edison
- */
 public class VentaPDF {
 
     private String nombreCliente;

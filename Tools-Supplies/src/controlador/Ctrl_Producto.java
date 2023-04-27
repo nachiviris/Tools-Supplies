@@ -9,10 +9,7 @@ import java.sql.Statement;
 import modelo.Producto;
 import java.math.BigDecimal;
 
-/**
- *
- * @author Edison Zambrano - © Programador Fantasma
- */
+
 public class Ctrl_Producto {
      /**
      * **************************************************

@@ -96,3 +96,8 @@ SELECT cv.idCabeceraVenta, cv.idCliente, c.nombre || ' ' || c.apellido as client
 cv.valorPagar, cv.fechaVenta, cv.estado
 FROM tb_cabecera_venta cv, tb_cliente c
 WHERE cv.idCliente = c.idCliente;
+
+
+CREATE OR REPLACE VIEW vista_clientes AS
+SELECT idCliente, nombre || ' ' || apellido as nombres, cedula, telefono, direccion
+FROM tb_cliente;
