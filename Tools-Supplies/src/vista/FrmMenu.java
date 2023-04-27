@@ -4,10 +4,7 @@ import controlador.Reportes;
 import java.awt.Dimension;
 import javax.swing.JDesktopPane;
 
-/**
- *
- * @author Edison Zambrano - © Programador Fantama
- */
+
 public class FrmMenu extends javax.swing.JFrame {
 
     public static JDesktopPane jDesktopPane_menu;
@@ -17,7 +14,7 @@ public class FrmMenu extends javax.swing.JFrame {
         this.setSize(new Dimension(1200, 700));
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
-        this.setTitle("Sistema de Ventas");
+        this.setTitle("Tools-Supplies");
 
         this.setLayout(null);
         jDesktopPane_menu = new JDesktopPane();

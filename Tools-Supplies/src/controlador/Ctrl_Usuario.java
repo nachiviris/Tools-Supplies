@@ -26,14 +26,13 @@ public class Ctrl_Usuario {
         boolean respuesta = false;
         Connection cn = Conexion.conectar();
         try {
-            PreparedStatement consulta = cn.prepareStatement("insert into tb_usuario values(?,?,?,?,?,?,?)");
-            consulta.setInt(1, 0);//id
-            consulta.setString(2, objeto.getNombre());
-            consulta.setString(3, objeto.getApellido());
-            consulta.setString(4, objeto.getUsuario());
-            consulta.setString(5, objeto.getPassword());
-            consulta.setString(6, objeto.getTelefono());
-            consulta.setInt(7, objeto.getEstado());
+            PreparedStatement consulta = cn.prepareStatement("insert into tb_usuario values(seq_idUsuario.nextval,?,?,?,?,?,?)");
+                consulta.setString(1, objeto.getNombre());
+                consulta.setString(2, objeto.getApellido());
+                consulta.setString(3, objeto.getUsuario());
+                consulta.setString(4, objeto.getPassword());
+                consulta.setString(5, objeto.getTelefono());
+                consulta.setInt(6, objeto.getEstado());
             if (consulta.executeUpdate() > 0) {
                 respuesta = true;
             }
@@ -51,7 +50,7 @@ public class Ctrl_Usuario {
      */
     public boolean existeUsuario(String usuario) {
         boolean respuesta = false;
-        String sql = "select usuario from tb_usuario where usuario = '" + usuario + "';";
+        String sql = "select usuario from tb_usuario where usuario = '" + usuario + "'";
         Statement st;
         try {
             Connection cn = Conexion.conectar();

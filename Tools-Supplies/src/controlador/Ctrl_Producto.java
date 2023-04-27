@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import modelo.Producto;
+import java.math.BigDecimal;
 
 /**
  *
@@ -23,15 +24,14 @@ public class Ctrl_Producto {
         Connection cn = Conexion.conectar();
         try {
 
-            PreparedStatement consulta = cn.prepareStatement("insert into tb_producto values(?,?,?,?,?,?,?,?)");
-            consulta.setInt(1, 0);//id
+            PreparedStatement consulta = cn.prepareStatement("insert into tb_producto values(seq_idProducto.nextval,?,?,?,?,?,?,?)");
+            consulta.setInt(1, objeto.getIdCategoria());
             consulta.setString(2, objeto.getNombre());
             consulta.setInt(3, objeto.getCantidad());
-            consulta.setDouble(4, objeto.getPrecio());
+            consulta.setInt(4, objeto.getPrecio());
             consulta.setString(5, objeto.getDescripcion());
             consulta.setInt(6, objeto.getPorcentajeIva());
-            consulta.setInt(7, objeto.getIdCategoria());
-            consulta.setInt(8, objeto.getEstado());
+            consulta.setInt(7, objeto.getEstado());
 
             if (consulta.executeUpdate() > 0) {
                 respuesta = true;
@@ -53,7 +53,7 @@ public class Ctrl_Producto {
      */
     public boolean existeProducto(String producto) {
         boolean respuesta = false;
-        String sql = "select nombre from tb_producto where nombre = '" + producto + "';";
+        String sql = "select nombre from tb_producto where nombre = '" + producto + "'";
         Statement st;
 
         try {
@@ -83,7 +83,7 @@ public class Ctrl_Producto {
             PreparedStatement consulta = cn.prepareStatement("update tb_producto set nombre=?, cantidad = ?, precio = ?, descripcion= ?, porcentajeIva = ?, idCategoria = ?, estado = ? where idProducto ='" + idProducto + "'");
             consulta.setString(1, objeto.getNombre());
             consulta.setInt(2, objeto.getCantidad());
-            consulta.setDouble(3, objeto.getPrecio());
+            consulta.setInt(3, objeto.getPrecio());
             consulta.setString(4, objeto.getDescripcion());
             consulta.setInt(5, objeto.getPorcentajeIva());
             consulta.setInt(6, objeto.getIdCategoria());

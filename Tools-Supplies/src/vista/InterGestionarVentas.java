@@ -5,6 +5,7 @@ import controlador.Ctrl_RegistrarVenta;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -246,9 +247,10 @@ public class InterGestionarVentas extends javax.swing.JInternalFrame {
     private void CargarTablaVentas() {
         Connection con = Conexion.conectar();
         DefaultTableModel model = new DefaultTableModel();
-        String sql = "select cv.idCabeceraVenta as id, concat(c.nombre, ' ', c.apellido) as cliente, "
-                + "cv.valorPagar as total, cv.fechaVenta as fecha, cv.estado "
-                + "from tb_cabecera_venta as cv, tb_cliente as c where cv.idCliente = c.idCliente;";
+        String sql = "SELECT cv.idCabeceraVenta AS id, c.nombre || ' ' || c.apellido AS cliente, " +
+    "cv.valorPagar AS total, cv.fechaVenta AS fecha, cv.estado " +
+    "FROM tb_cabecera_venta cv, tb_cliente c WHERE cv.idCliente = c.idCliente";
+
         Statement st;
         try {
             st = con.createStatement();
@@ -291,7 +293,7 @@ public class InterGestionarVentas extends javax.swing.JInternalFrame {
                 int columna_point = 0;
 
                 if (fila_point > -1) {
-                    idVenta = (int) model.getValueAt(fila_point, columna_point);
+                    idVenta = ((BigDecimal) model.getValueAt(fila_point, columna_point)).intValue();
                     EnviarDatosVentaSeleccionada(idVenta);//metodo
                 }
             }
@@ -304,14 +306,12 @@ public class InterGestionarVentas extends javax.swing.JInternalFrame {
      * Metodo que envia datos seleccionados
      * **************************************************
      */
-    private void EnviarDatosVentaSeleccionada(int idVenta) {
+private void EnviarDatosVentaSeleccionada(int idVenta) {
         try {
             Connection con = Conexion.conectar();
-            PreparedStatement pst = con.prepareStatement(
-                    "select cv.idCabeceraVenta, cv.idCliente, concat(c.nombre, ' ', c.apellido) as cliente, "
-                    + "cv.valorPagar, cv.fechaVenta, cv.estado  from tb_cabecera_venta as cv, "
-                    + "tb_cliente as c where  cv.idCabeceraVenta = '" + idVenta + "' and cv.idCliente = c.idCliente;");
-            ResultSet rs = pst.executeQuery();
+           PreparedStatement pst = con.prepareStatement("SELECT * FROM vista_ventas_clientes");
+ResultSet rs = pst.executeQuery();
+
             if (rs.next()) {
                 jComboBox_cliente.setSelectedItem(rs.getString("cliente"));
                 txt_total_pagar.setText(rs.getString("valorPagar"));
@@ -328,6 +328,7 @@ public class InterGestionarVentas extends javax.swing.JInternalFrame {
             System.out.println("Error al seleccionar venta: " + e);
         }
     }
+
 
     /*
     Metodo para cargar los clientes en el jComboBox

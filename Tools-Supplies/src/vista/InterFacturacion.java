@@ -461,7 +461,7 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
 
         String fechaActual = "";
         Date date = new Date();
-        fechaActual = new SimpleDateFormat("yyyy/MM/dd").format(date);
+        fechaActual = new SimpleDateFormat("dd/MM/yyyy").format(date);
 
         if (!jComboBox_cliente.getSelectedItem().equals("Seleccione cliente:")) {
             if (listaProductos.size() > 0) {
@@ -708,21 +708,21 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
     /*
     Metodo para obtener id del cliente
      */
-    private void ObtenerIdCliente() {
-        try {
-            String sql = "select * from tb_cliente where concat(nombre,' ',apellido) = '" + this.jComboBox_cliente.getSelectedItem() + "'";
-            Connection cn = Conexion.conectar();
-            Statement st;
-            st = cn.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            while (rs.next()) {
-                idCliente = rs.getInt("idCliente");
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Error al obtener id del cliente, " + e);
+ private void ObtenerIdCliente() {
+    try {
+        String sql = "SELECT * FROM tb_cliente WHERE nombre || ' ' || apellido = ?";
+        Connection cn = Conexion.conectar();
+        PreparedStatement ps = cn.prepareStatement(sql);
+        ps.setString(1, (String) this.jComboBox_cliente.getSelectedItem());
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            idCliente = rs.getInt("idCliente");
         }
+    } catch (SQLException e) {
+        System.out.println("Error al obtener id del cliente, " + e);
     }
+}
+
 
     //metodo para restar la cantidad (stock) de los productos vendidos
     private void RestarStockProductos(int idProducto, int cantidad) {

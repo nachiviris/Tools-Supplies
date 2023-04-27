@@ -7,17 +7,14 @@ import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import modelo.Usuario;
 
-/**
- *
- * @author Edison Zambrano - © Programador Fantama
- */
+
 public class FrmLogin extends javax.swing.JFrame {
 
     public FrmLogin() {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        this.setTitle("Login - SISTEMA DE VENTAS");
+        this.setTitle("Login - ToolsSupplies");
         this.setSize(new Dimension(700, 500));
     }
 
@@ -51,7 +48,7 @@ public class FrmLogin extends javax.swing.JFrame {
         setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setPreferredSize(new java.awt.Dimension(350, 500));
 

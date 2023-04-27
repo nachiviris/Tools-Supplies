@@ -5,6 +5,7 @@ import controlador.Ctrl_Categoria;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -219,7 +220,8 @@ public class InterGestionarCategoria extends javax.swing.JInternalFrame {
                 int columna_point = 0;
 
                 if (fila_point > -1) {
-                    idCategoria = (int) model.getValueAt(fila_point, columna_point);
+                    idCategoria = ((BigDecimal) model.getValueAt(fila_point, columna_point)).intValue();
+
                     EnviarDatosCategoriaSeleccionada(idCategoria);
                 }
             }

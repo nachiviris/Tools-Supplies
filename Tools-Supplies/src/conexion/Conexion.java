@@ -4,16 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- *
- * @author ediso
- */
 public class Conexion {
 
     //conexion local
     public static Connection conectar() {
         try {
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/bd_sistema_ventas", "root", "1234");
+            Connection cn = DriverManager.getConnection("jdbc:oracle:thin:@//localhost:1521/orcl", "SYSTEM_TS", "systemts");
             return cn;
         } catch (SQLException e) {
             System.out.println("Error en la conexion local " + e);

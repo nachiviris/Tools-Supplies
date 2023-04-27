@@ -6,6 +6,7 @@ import controlador.Ctrl_Usuario;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -308,7 +309,7 @@ public class InterGestionarUsuario extends javax.swing.JInternalFrame {
                 int columna_point = 0;
 
                 if (fila_point > -1) {
-                    idUsuario = (int) model.getValueAt(fila_point, columna_point);
+                    idUsuario = ((BigDecimal) model.getValueAt(fila_point, columna_point)).intValue();
                     EnviarDatosUsuarioSeleccionado(idUsuario);//metodo
                 }
             }

@@ -1,16 +1,14 @@
 package modelo;
+import java.math.BigDecimal;
 
-/**
- *
- * @author ediso
- */
+
 public class Producto {
     
     //Atributos
     private int idProducto;
     private String nombre;
     private int cantidad;
-    private double precio;
+    private int precio;
     private String descripcion;
     private int porcentajeIva;
     private int idCategoria;
@@ -18,17 +16,17 @@ public class Producto {
     
     //Contructor
     public Producto(){
-        this.idProducto = 0;
+        this.idProducto = 1;
         this.nombre = "";
         this.cantidad = 0;
-        this.precio = 0.0;
+        this.precio = 0;
         this.descripcion = "";
         this.porcentajeIva = 0;
         this.idCategoria = 0;
         this.estado = 0;
     }
     //Contructor sobrecargado
-    public Producto(int idProducto, String nombre, int cantidad, double precio, String descripcion, int porcentajeIva, int idCategoria, int estado) {
+    public Producto(int idProducto, String nombre, int cantidad, int precio, String descripcion, int porcentajeIva, int idCategoria, int estado) {
         this.idProducto = idProducto;
         this.nombre = nombre;
         this.cantidad = cantidad;
@@ -65,11 +63,11 @@ public class Producto {
         this.cantidad = cantidad;
     }
 
-    public double getPrecio() {
+    public int getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(int precio) {
         this.precio = precio;
     }
 

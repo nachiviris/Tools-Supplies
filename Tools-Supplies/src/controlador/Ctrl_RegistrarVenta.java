@@ -60,17 +60,16 @@ public class Ctrl_RegistrarVenta {
         boolean respuesta = false;
         Connection cn = Conexion.conectar();
         try {
-            PreparedStatement consulta = cn.prepareStatement("insert into tb_detalle_venta values(?,?,?,?,?,?,?,?,?,?)");
-            consulta.setInt(1, 0);//id
-            consulta.setInt(2, idCabeceraRegistrada);
-            consulta.setInt(3, objeto.getIdProducto());
-            consulta.setInt(4, objeto.getCantidad());
-            consulta.setDouble(5, objeto.getPrecioUnitario());
-            consulta.setDouble(6, objeto.getSubTotal());
-            consulta.setDouble(7, objeto.getDescuento());
-            consulta.setDouble(8, objeto.getIva());
-            consulta.setDouble(9, objeto.getTotalPagar());
-            consulta.setInt(10, objeto.getEstado());
+            PreparedStatement consulta = cn.prepareStatement("insert into tb_detalle_venta values(seq_idDetalleVenta.nextval,?,?,?,?,?,?,?,?,?)");
+            consulta.setInt(1, idCabeceraRegistrada);
+            consulta.setInt(2, objeto.getIdProducto());
+            consulta.setInt(3, objeto.getCantidad());
+            consulta.setDouble(4, objeto.getPrecioUnitario());
+            consulta.setDouble(5, objeto.getSubTotal());
+            consulta.setDouble(6, objeto.getDescuento());
+            consulta.setDouble(7, objeto.getIva());
+            consulta.setDouble(8, objeto.getTotalPagar());
+            consulta.setInt(9, objeto.getEstado());
             
             if (consulta.executeUpdate() > 0) {
                 respuesta = true;

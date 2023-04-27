@@ -20,7 +20,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import modelo.Categoria;
 import modelo.Producto;
-
+import java.math.BigDecimal;
 /**
  *
  * @author ediso
@@ -217,7 +217,7 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
                         producto.setNombre(txt_nombre.getText().trim());
                         producto.setCantidad(Integer.parseInt(txt_cantidad.getText().trim()));
                         String precioTXT = "";
-                        double Precio = 0.0;
+                        int Precio = 0;
                         precioTXT = txt_precio.getText().trim();
                         boolean aux = false;
                         /*
@@ -227,7 +227,7 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
                         for (int i = 0; i < precioTXT.length(); i++) {
                             if (precioTXT.charAt(i) == ',') {
                                 String precioNuevo = precioTXT.replace(",", ".");
-                                Precio = Double.parseDouble(precioNuevo);
+                                Precio = Integer.parseInt(precioNuevo);
                                 aux = true;
                             }
                         }
@@ -235,7 +235,7 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
                         if (aux == true) {
                             producto.setPrecio(Precio);
                         } else {
-                            Precio = Double.parseDouble(precioTXT);
+                            Precio = Integer.parseInt(precioTXT);
                             producto.setPrecio(Precio);
                         }
 
@@ -365,7 +365,7 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
     private void CargarTablaProductos() {
         Connection con = Conexion.conectar();
         DefaultTableModel model = new DefaultTableModel();
-        String sql = "select p.idProducto, p.nombre, p.cantidad, p.precio, p.descripcion, p.porcentajeIva, c.descripcion, p.estado from tb_producto As p, tb_categoria As c where p.idCategoria = c.idCategoria;";
+        String sql = "select * from tb_producto";
         Statement st;
         try {
             st = con.createStatement();
@@ -413,7 +413,7 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
                 int columna_point = 0;
 
                 if (fila_point > -1) {
-                    idProducto = (int) model.getValueAt(fila_point, columna_point);
+                    idProducto = ((BigDecimal) model.getValueAt(fila_point, columna_point)).intValue();
                     EnviarDatosProductoSeleccionado(idProducto);//metodo
                 }
             }

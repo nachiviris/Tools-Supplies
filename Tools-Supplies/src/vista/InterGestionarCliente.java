@@ -5,6 +5,7 @@ import controlador.Ctrl_Cliente;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -302,7 +303,7 @@ public class InterGestionarCliente extends javax.swing.JInternalFrame {
                 int columna_point = 0;
 
                 if (fila_point > -1) {
-                    idCliente = (int) model.getValueAt(fila_point, columna_point);
+                    idCliente = ((BigDecimal) model.getValueAt(fila_point, columna_point)).intValue();
                     EnviarDatosClienteSeleccionado(idCliente);//metodo
                 }
             }

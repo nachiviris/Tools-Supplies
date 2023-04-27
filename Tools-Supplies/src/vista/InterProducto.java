@@ -5,6 +5,7 @@ import controlador.Ctrl_Producto;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -162,7 +163,7 @@ public class InterProducto extends javax.swing.JInternalFrame {
                             producto.setNombre(txt_nombre.getText().trim());
                             producto.setCantidad(Integer.parseInt(txt_cantidad.getText().trim()));
                             String precioTXT = "";
-                            double Precio = 0.0;
+                            int Precio = 0;
                             precioTXT = txt_precio.getText().trim();
                             boolean aux = false;
                             /*
@@ -172,7 +173,7 @@ public class InterProducto extends javax.swing.JInternalFrame {
                             for (int i = 0; i < precioTXT.length(); i++) {
                                 if (precioTXT.charAt(i) == ',') {
                                     String precioNuevo = precioTXT.replace(",", ".");
-                                    Precio = Double.parseDouble(precioNuevo);
+                                    Precio = Integer.parseInt(precioNuevo);
                                     aux = true;
                                 }
                             }
@@ -180,7 +181,7 @@ public class InterProducto extends javax.swing.JInternalFrame {
                             if (aux == true) {
                                 producto.setPrecio(Precio);
                             } else {
-                                Precio = Double.parseDouble(precioTXT);
+                                Precio = Integer.parseInt(precioTXT);
                                 producto.setPrecio(Precio);
                             }
 
