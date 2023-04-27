@@ -132,3 +132,49 @@ BEGIN
     COMMIT;
 END;
 
+----------------Procedures Categoria------------
+
+----Create---
+CREATE OR REPLACE PROCEDURE crear_categoria (
+    p_nombre_categoria IN VARCHAR2,
+    p_descripcion_categoria IN VARCHAR2
+) AS
+BEGIN
+    INSERT INTO Categorias (categoria_id, nombre_categoria, descripcion_categoria)
+    VALUES (seq_categoria.nextval, p_nombre_categoria, p_descripcion_categoria);
+    COMMIT;
+END;
+---Replace
+CREATE OR REPLACE PROCEDURE obtener_categoria (
+    p_categoria_id IN INT,
+    p_nombre_categoria OUT VARCHAR2,
+    p_descripcion_categoria OUT VARCHAR2
+) AS
+BEGIN
+    SELECT nombre_categoria, descripcion_categoria
+    INTO p_nombre_categoria, p_descripcion_categoria
+    FROM Categorias
+    WHERE categoria_id = p_categoria_id;
+END;
+----Update---
+CREATE OR REPLACE PROCEDURE actualizar_categoria (
+    p_categoria_id IN INT,
+    p_nombre_categoria IN VARCHAR2,
+    p_descripcion_categoria IN VARCHAR2
+) AS
+BEGIN
+    UPDATE Categorias
+    SET nombre_categoria = p_nombre_categoria, descripcion_categoria = p_descripcion_categoria
+    WHERE categoria_id = p_categoria_id;
+    COMMIT;
+END;
+----Delete-----
+CREATE OR REPLACE PROCEDURE eliminar_categoria (
+    p_categoria_id IN INT
+) AS
+BEGIN
+    DELETE FROM Categorias
+    WHERE categoria_id = p_categoria_id;
+    COMMIT;
+END;
+
