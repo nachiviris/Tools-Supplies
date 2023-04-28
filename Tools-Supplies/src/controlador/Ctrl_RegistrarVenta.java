@@ -26,13 +26,12 @@ public class Ctrl_RegistrarVenta {
         boolean respuesta = false;
         Connection cn = Conexion.conectar();
         try {
-            PreparedStatement consulta = cn.prepareStatement("insert into tb_cabecera_venta values(?,?,?,?,?)",
+            PreparedStatement consulta = cn.prepareStatement("insert into tb_cabecera_venta values(seq_idCabeceraVenta.nextval,?,?,?,?)",
                     Statement.RETURN_GENERATED_KEYS);
-            consulta.setInt(1, 0);//id
-            consulta.setInt(2, objeto.getIdCliente());
-            consulta.setDouble(3, objeto.getValorPagar());
-            consulta.setString(4, objeto.getFechaVenta());
-            consulta.setInt(5, objeto.getEstado());
+            consulta.setInt(1, objeto.getIdCliente());
+            consulta.setDouble(2, objeto.getValorPagar());
+            consulta.setString(3, objeto.getFechaVenta());
+            consulta.setInt(4, objeto.getEstado());
             
             if (consulta.executeUpdate() > 0) {
                 respuesta = true;
